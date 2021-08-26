@@ -1,14 +1,14 @@
 import React, {ChangeEvent, ChangeEventHandler, LegacyRef, RefObject } from 'react';
 import {Post} from './Post/Post'
 import s from './MyPosts.module.css'
-import { postsDataType } from '../../../redux/store';
+import {ActionTypes, postsDataType} from '../../../redux/store';
+import {addPostAC, updateNewPostTextAC } from '../../../redux/ProfileReducer';
 
 
 type propsType = {
     posts: postsDataType
     newPostText: string
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 export const MyPosts = (props: propsType) => {
 
@@ -16,13 +16,14 @@ export const MyPosts = (props: propsType) => {
         props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
+
 
     }
 
     const addPost = () => {
-        props.addPost()
-        props.updateNewPostText('')
+        props.dispatch(addPostAC())
+        props.dispatch(updateNewPostTextAC(''))
     }
 
 
