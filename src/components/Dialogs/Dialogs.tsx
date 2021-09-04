@@ -3,18 +3,19 @@ import s from './Dialogs.module.css'
 import {NavLink} from 'react-router-dom'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
-import {ActionTypes, dialogsDataType, messageDataType, stateType} from '../../redux/store'
-import {sendNewMessageAC, updateNewMessageBodyAC} from '../../redux/DialogsReducer'
+
+import {DialogsReducerActionTypes, DialogsPageType, sendNewMessageAC, updateNewMessageBodyAC} from '../../redux/DialogsReducer'
+import {Button, TextField } from '@material-ui/core'
 
 
 type DialogsPropsType = {
-    state: stateType
-    dispatch: (action: ActionTypes) => void
+    state: DialogsPageType
+    dispatch: (action: DialogsReducerActionTypes) => void
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let state = props.state.dialogsPage
+    let state = props.state
 
     let dialogsElements = state.dialogs
         .map(d => <DialogItem name={d.name} id={d.id}/>)
@@ -33,9 +34,9 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             <div className={s.messages}>
                 {messagesElements}
             </div>
-            <textarea value={state.newMessageBody} onChange={onChangeHandler}
-                      placeholder={'Enter your message'}></textarea>
-            <button onClick={() => props.dispatch(sendNewMessageAC())}>Send message</button>
+            <TextField color={"primary"}  value={state.newMessageBody} onChange={onChangeHandler}
+                      placeholder={'Enter your message'} />
+            <Button onClick={() => props.dispatch(sendNewMessageAC())}>Send message</Button>
         </div>
     )
 }

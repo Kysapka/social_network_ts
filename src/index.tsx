@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store, stateType, storeType } from './redux/store';
-import {BrowserRouter} from 'react-router-dom';
+import rootStore from './redux/rootStore'
 
+import {BrowserRouter} from 'react-router-dom';
 
 export let rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+                <App state={rootStore.getState()} dispatch={rootStore.dispatch.bind(rootStore)} />
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -20,7 +20,7 @@ export let rerenderEntireTree = () => {
 
 rerenderEntireTree();
 
-store._subscribe(rerenderEntireTree)
+rootStore.subscribe(rerenderEntireTree)
 
 
 reportWebVitals();

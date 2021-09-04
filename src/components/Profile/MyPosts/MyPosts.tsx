@@ -1,14 +1,15 @@
 import React, {ChangeEvent, ChangeEventHandler, LegacyRef, RefObject } from 'react';
 import {Post} from './Post/Post'
 import s from './MyPosts.module.css'
-import {ActionTypes, postsDataType} from '../../../redux/store';
-import {addPostAC, updateNewPostTextAC } from '../../../redux/ProfileReducer';
+import {addPostAC, postsDataType, ProfileReducerActionTypes, updateNewPostTextAC } from '../../../redux/ProfileReducer';
+import {Button, Input, TextField } from '@material-ui/core';
+
 
 
 type propsType = {
     posts: postsDataType
     newPostText: string
-    dispatch: (action: ActionTypes) => void
+    dispatch: (action: ProfileReducerActionTypes) => void
 }
 export const MyPosts = (props: propsType) => {
 
@@ -32,10 +33,10 @@ export const MyPosts = (props: propsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea value={props.newPostText} onChange={onChangeHandler}></textarea>
+                    <TextField value={props.newPostText} onChange={onChangeHandler} />
                 </div>
                 <div>
-                    <button onClick={addPost}>Add Post</button>
+                    <Button variant={"contained"} onClick={addPost}>Add Post</Button>
                 </div>
             </div>
             <div className={s.posts}>

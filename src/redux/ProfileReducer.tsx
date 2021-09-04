@@ -1,19 +1,38 @@
-import {ActionTypes, dialogsDataType, messageDataType, postsDataType, stateType} from "./store"
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 
 
-type ProfileReducerType = (action: ActionTypes, state: ProfilePageType) => ProfilePageType
-type ProfilePageType = {
+
+export type postsDataType = postType[]
+type postType = {
+    id: string
+    message: string
+    likesCount: number
+}
+
+
+
+export type ProfilePageType = {
     posts: postsDataType,
     newPostText: string
 }
+
+export type ProfileReducerActionTypes = AddPostActionType | UpdateNewTextActionType
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type UpdateNewTextActionType = ReturnType<typeof updateNewPostTextAC>
 
+const initProfileState:ProfilePageType =  {
+    posts: [
+        {id: '1', message: 'Hi, haw are you?', likesCount: 2},
+        {id: '1', message: 'This is my first post', likesCount: 8}
+    ],
+        newPostText: "it-kamasutra"
+}
 
-export const ProfileReducer: ProfileReducerType = (action, state) => {
+type ProfileReducerType = (state: ProfilePageType, action: ProfileReducerActionTypes) => ProfilePageType
+
+export const ProfileReducer: ProfileReducerType = (state = initProfileState, action):ProfilePageType => {
 
     switch (action.type) {
         case ADD_POST:
