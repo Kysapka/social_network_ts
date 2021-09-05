@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
 type rootReducerType = typeof rootReducer
 export type AppStateType = ReturnType<rootReducerType>
 
+// Creatre Redux STORE
 let rootStore = createStore(rootReducer)
 
  export default rootStore;

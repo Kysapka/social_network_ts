@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 
+
 import {DialogsReducerActionTypes, DialogsPageType, sendNewMessageAC, updateNewMessageBodyAC} from '../../redux/DialogsReducer'
 import {Button, TextField } from '@material-ui/core'
 
