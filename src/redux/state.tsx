@@ -1,10 +1,7 @@
-import {DialogsReducer, SendNewMessageActionType, updateNewMessageBodyType} from "./DialogsReducer";
-import {AddPostActionType, ProfileReducer, UpdateNewTextActionType} from "./ProfileReducer";
-
-const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
-const SEND_NEW_MESSAGE = 'SEND_NEW_MESSAGE';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+// const ADD_POST = 'ADD_POST';
+// const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+// const SEND_NEW_MESSAGE = 'SEND_NEW_MESSAGE';
+// const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 
 // export type stateType = {
 //     profilePage: {
@@ -34,14 +31,11 @@ const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 //     id: string
 //     message: string
 // }
-
 // export type ActionTypes =
 //     AddPostActionType
 //     | UpdateNewTextActionType
 //     | SendNewMessageActionType
 //     | updateNewMessageBodyType
-
-
 // export type storeType = {
 //     _callSubscriber: () => void
 //     _subscribe: (observer: () => void) => void
@@ -50,7 +44,6 @@ const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 //     dispatch: (action: ActionTypes) => void
 //
 // }
-
 // export const state: storeType = {
 //     _callSubscriber() {
 //         console.log("APP RENDERING")
@@ -100,3 +93,4 @@ const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 //
 //     }
 // }
+export default 1

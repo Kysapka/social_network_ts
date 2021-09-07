@@ -4,12 +4,11 @@ import s from './MyPosts.module.css'
 import {addPostAC, postsDataType, ProfileReducerActionTypes, updateNewPostTextAC } from '../../../redux/ProfileReducer';
 import {Button, Input, TextField } from '@material-ui/core';
 
-
-
 type propsType = {
     posts: postsDataType
     newPostText: string
-    dispatch: (action: ProfileReducerActionTypes) => void
+    addPost: () => void
+    onChangeHandler: (value: string) => void
 }
 export const MyPosts = (props: propsType) => {
 
@@ -17,16 +16,8 @@ export const MyPosts = (props: propsType) => {
         props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
-
-
+        props.onChangeHandler(e.currentTarget.value)
     }
-
-    const addPost = () => {
-        props.dispatch(addPostAC())
-        props.dispatch(updateNewPostTextAC(''))
-    }
-
 
     return (
         <div className={s.postsBlock}>
@@ -36,7 +27,7 @@ export const MyPosts = (props: propsType) => {
                     <TextField value={props.newPostText} onChange={onChangeHandler} />
                 </div>
                 <div>
-                    <Button variant={"contained"} onClick={addPost}>Add Post</Button>
+                    <Button variant={"contained"} onClick={props.addPost}>Add Post</Button>
                 </div>
             </div>
             <div className={s.posts}>

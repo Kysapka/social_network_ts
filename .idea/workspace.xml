@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="abd19def-bd4f-4238-b299-ee2952f95190" name="Changes" comment="Convert to Redux" />
+    <list default="true" id="abd19def-bd4f-4238-b299-ee2952f95190" name="Changes" comment="Redux type begin">
+      <change afterPath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPostsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/DialogsReducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/DialogsReducer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/ProfileReducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/ProfileReducer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/rootStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/rootStore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/state.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/state.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,13 +47,15 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="CONST" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lesson_3/it-incubator-todolist-ts-03" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Profile/MyPosts" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\incubator\social_network_ts\src\components\Profile\MyPosts" />
+      <recent name="E:\incubator\social_network_ts\src\components\Profile" />
       <recent name="E:\incubator\social_network_ts\src\components\Dialogs\MessageItem" />
       <recent name="E:\incubator\social_network_ts\src\components\Dialogs\DialogItem" />
     </key>
@@ -88,6 +101,10 @@
       <workItem from="1629988472000" duration="2014000" />
       <workItem from="1630615043374" duration="577000" />
       <workItem from="1630765564285" duration="6556000" />
+      <workItem from="1630870273430" duration="97000" />
+      <workItem from="1630885296238" duration="420000" />
+      <workItem from="1630887722925" duration="386000" />
+      <workItem from="1631048639609" duration="2289000" />
     </task>
     <task id="LOCAL-00001" summary="Reduser refactoring">
       <created>1629990399674</created>
@@ -110,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630772720595</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Redux type begin">
+      <created>1630870382718</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1630870382718</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +169,7 @@
     <MESSAGE value="Reduser refactoring" />
     <MESSAGE value="Material UI prepearing" />
     <MESSAGE value="Convert to Redux" />
-    <option name="LAST_COMMIT_MESSAGE" value="Convert to Redux" />
+    <MESSAGE value="Redux type begin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Redux type begin" />
   </component>
 </project>

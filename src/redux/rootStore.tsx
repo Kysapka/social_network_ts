@@ -10,11 +10,14 @@ const rootReducer = combineReducers({
     dialogsPage: DialogsReducer
 })
 
-type rootReducerType = typeof rootReducer
-export type AppStateType = ReturnType<rootReducerType>
+
+export type StoreType = typeof rootStore
+export type AppStateType = ReturnType<typeof rootReducer>
 
 // Creatre Redux STORE
 let rootStore = createStore(rootReducer)
+
+
 
  export default rootStore;
 

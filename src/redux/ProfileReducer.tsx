@@ -30,9 +30,9 @@ const initProfileState:ProfilePageType =  {
         newPostText: "it-kamasutra"
 }
 
-type ProfileReducerType = (state: ProfilePageType, action: ProfileReducerActionTypes) => ProfilePageType
 
-export const ProfileReducer: ProfileReducerType = (state = initProfileState, action):ProfilePageType => {
+
+export const ProfileReducer = (state:ProfilePageType = initProfileState, action: ProfileReducerActionTypes):ProfilePageType => {
 
     switch (action.type) {
         case ADD_POST:
