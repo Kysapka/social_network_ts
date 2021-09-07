@@ -5,7 +5,7 @@ import {addPostAC, postsDataType, ProfileReducerActionTypes, updateNewPostTextAC
 import {Button, Input, TextField } from '@material-ui/core';
 import { MyPosts } from './MyPosts';
 import {AppStateType, StoreType } from '../../../redux/rootStore';
-
+// Container Component
 type propsType = {
     store: StoreType
 }
