@@ -5,9 +5,6 @@ export type DialogsReducerActionTypes =
     SendNewMessageActionType
     | updateNewMessageBodyType
 
-type DialogsReducerType = (state: DialogsPageType, action: DialogsReducerActionTypes) => DialogsPageType
-
-
 export type DialogsPageType = {
     dialogs: dialogsDataType
     messages: messageDataType
@@ -25,7 +22,7 @@ type messageType = {
     message: string
 }
 
-export type ActionsTypes =
+export type DialogsReducersActionsTypes =
       SendNewMessageActionType
     | updateNewMessageBodyType
 
@@ -52,16 +49,18 @@ const initDialogsState: DialogsPageType = {
     ]
 }
 
-export const DialogsReducer: DialogsReducerType = (state = initDialogsState, action): DialogsPageType => {
+export const DialogsReducer = (state: DialogsPageType = initDialogsState, action: DialogsReducersActionsTypes): DialogsPageType => {
     switch (action.type) {
         case SEND_NEW_MESSAGE:
             let newBodyMessage = state.newMessageBody
-            state.messages.push({id: '6', message: newBodyMessage})
+            let copyState = {...state}
+            copyState.messages.push({id: '6', message: newBodyMessage})
             state.newMessageBody = ''
-            return state;
+            return copyState;
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.newMessageBody
-            return state;
+            let updatedState = {...state}
+            updatedState.newMessageBody = action.newMessageBody
+            return updatedState;
         default:
             return state;
     }

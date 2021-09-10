@@ -1,16 +1,11 @@
-import React, {ChangeEvent, ChangeEventHandler, LegacyRef, RefObject } from 'react';
+import React, {ChangeEvent, ChangeEventHandler, LegacyRef, RefObject} from 'react';
 import {Post} from './Post/Post'
 import s from './MyPosts.module.css'
-import {addPostAC, postsDataType, ProfileReducerActionTypes, updateNewPostTextAC } from '../../../redux/ProfileReducer';
-import {Button, Input, TextField } from '@material-ui/core';
+import {addPostAC, postsDataType, ProfileReducerActionTypes, updateNewPostTextAC} from '../../../redux/ProfileReducer';
+import {Button, Input, TextField} from '@material-ui/core';
+import {myPostsPropsType} from './MyPostsContainer';
 
-type propsType = {
-    posts: postsDataType
-    newPostText: string
-    addPost: () => void
-    onChangeHandler: (value: string) => void
-}
-export const MyPosts = (props: propsType) => {
+export const MyPosts = (props: myPostsPropsType) => {
 
     let postsElements =
         props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
@@ -24,10 +19,12 @@ export const MyPosts = (props: propsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <TextField value={props.newPostText} onChange={onChangeHandler} />
+                    <TextField label="Enter your post message" variant="outlined" value={props.newPostText}
+                               onChange={onChangeHandler}/>
                 </div>
                 <div>
-                    <Button variant={"contained"} onClick={props.addPost}>Add Post</Button>
+                    <Button style={{marginTop: 10}} color="primary" variant={"contained"} onClick={props.addPost}>Add
+                        Post</Button>
                 </div>
             </div>
             <div className={s.posts}>
