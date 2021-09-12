@@ -1,0 +1,15 @@
+.userContainer {
+    display: flex;
+    height: 90%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.userItem {
+    padding: 5px 5px;
+}
+
+nameItem {
+    margin-bottom: 10px;
+}
