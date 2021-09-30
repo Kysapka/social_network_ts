@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="abd19def-bd4f-4238-b299-ee2952f95190" name="Changes" comment="Container Component">
-      <change afterPath="$PROJECT_DIR$/src/components/Users/UserContainer.module.css" afterDir="false" />
+    <list default="true" id="abd19def-bd4f-4238-b299-ee2952f95190" name="Changes" comment="Convert User component to Class for training">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/UsersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/UsersReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +115,12 @@
       <workItem from="1631079463783" duration="19824000" />
       <workItem from="1631275171415" duration="7614000" />
       <workItem from="1631355610708" duration="3661000" />
-      <workItem from="1631433212057" duration="8931000" />
+      <workItem from="1631433212057" duration="10692000" />
+      <workItem from="1631827215429" duration="615000" />
+      <workItem from="1631978300980" duration="715000" />
+      <workItem from="1632031692639" duration="517000" />
+      <workItem from="1632174605895" duration="41000" />
+      <workItem from="1632510258977" duration="674000" />
     </task>
     <task id="LOCAL-00001" summary="Reduser refactoring">
       <created>1629990399674</created>
@@ -156,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631051256554</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Convert User component to Class for training">
+      <created>1631464833918</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1631464833918</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +201,7 @@
     <MESSAGE value="Convert to Redux" />
     <MESSAGE value="Redux type begin" />
     <MESSAGE value="Container Component" />
-    <option name="LAST_COMMIT_MESSAGE" value="Container Component" />
+    <MESSAGE value="Convert User component to Class for training" />
+    <option name="LAST_COMMIT_MESSAGE" value="Convert User component to Class for training" />
   </component>
 </project>

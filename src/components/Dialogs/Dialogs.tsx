@@ -28,7 +28,7 @@ const useGridStyles = makeStyles((theme) => ({
 }));
 
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = React.memo((props: DialogsPropsType) => {
 
     const useGridClasses = useGridStyles();
 
@@ -56,7 +56,6 @@ export const Dialogs = (props: DialogsPropsType) => {
                     </Paper>
                 </Grid>
 
-
                 <Grid item xs={12}>
 
                     <TextField size="small" label="Enter your message" variant="outlined"
@@ -70,4 +69,4 @@ export const Dialogs = (props: DialogsPropsType) => {
         </div>
 
     )
-}
+})
