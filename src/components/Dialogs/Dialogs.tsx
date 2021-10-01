@@ -4,16 +4,10 @@ import {NavLink} from 'react-router-dom'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 import {Box, Container, Grid, makeStyles, Paper} from '@material-ui/core';
-import {
-    DialogsReducerActionTypes,
-    DialogsPageType,
-    sendNewMessageAC,
-    updateNewMessageBodyAC
-} from '../../redux/DialogsReducer'
+import {DialogsReducerActionTypes, DialogsPageType, sendNewMessageAC, updateNewMessageBodyAC} from '../../redux/DialogsReducer'
 import {Button, TextField} from '@material-ui/core'
 import {AppStateType} from '../../redux/rootStore'
 import {DialogsPropsType} from './DialogsContainer'
-
 
 const useGridStyles = makeStyles((theme) => ({
     root: {
@@ -26,7 +20,6 @@ const useGridStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
     },
 }));
-
 
 export const Dialogs = React.memo((props: DialogsPropsType) => {
 
