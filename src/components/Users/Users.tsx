@@ -1,6 +1,6 @@
 import {Button, Grid, makeStyles, Paper} from '@material-ui/core';
 import React, {ReactNode} from 'react';
-import {UsersPageType} from '../../redux/UsersReducer';
+import {UsersType} from '../../redux/UsersReducer';
 import {UsersPropsType} from './UsersContainer';
 import s from './UserContainer.module.css'
 import axios from 'axios';
@@ -19,7 +19,7 @@ class Users extends React.Component<UsersPropsType> {
     render() {
         return(
         <div className={s.userContainer}>
-            {this.props.usersPage.map(u => {
+            {this.props.users.map(u => {
                 return (
                     <Paper key={u.id} className={s.userItem}>
                         <div className={s.nameItem}>{u.name}</div>
