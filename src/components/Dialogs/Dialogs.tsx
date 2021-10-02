@@ -1,12 +1,7 @@
 import React, {ChangeEvent} from 'react'
-import s from './Dialogs.module.css'
-import {NavLink} from 'react-router-dom'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
-import {Box, Container, Grid, makeStyles, Paper} from '@material-ui/core';
-import {DialogsReducerActionTypes, DialogsPageType, sendNewMessageAC, updateNewMessageBodyAC} from '../../redux/DialogsReducer'
-import {Button, TextField} from '@material-ui/core'
-import {AppStateType} from '../../redux/rootStore'
+import {Button, Grid, makeStyles, Paper, TextField} from '@material-ui/core';
 import {DialogsPropsType} from './DialogsContainer'
 
 const useGridStyles = makeStyles((theme) => ({

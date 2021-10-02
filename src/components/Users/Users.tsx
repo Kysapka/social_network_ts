@@ -1,7 +1,6 @@
-import {Button, Grid, makeStyles, Paper} from '@material-ui/core';
-import React, {ReactNode} from 'react';
+import {Button, Paper} from '@material-ui/core';
+import React from 'react';
 import s from './UserContainer.module.css'
-import axios from 'axios';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {UserType} from '../../redux/UsersReducer';
@@ -32,10 +31,6 @@ export const Users = (props: UsersPropsType) => {
                     />
                 </Stack>
 
-                {pages.map(p => {
-                    return
-                })}
-
             </div>
 
             {props.users.map(u => {
@@ -45,7 +40,7 @@ export const Users = (props: UsersPropsType) => {
                         <div className={s.nameItem}>{u.name}</div>
 
                         <div className={s.userInfoBlock}>
-                            <img className={s.userPhoto} src={u.photos.small}/>
+                            <img className={s.userPhoto} alt='userAvatar' src={u.photos.small === null ?  'https://yt3.ggpht.com/a/AATXAJyI6-JI9qHzW3CX3PbTnj2U2zbbWu_V90qcybiEUg=s900-c-k-c0xffffffff-no-rj-mo' :  u.photos.small}/>
                             {u.followed
                                 ? <Button variant="outlined" color="primary" size="small"
                                           onClick={() => props.unFollow(u.id)}>Unfollow</Button>

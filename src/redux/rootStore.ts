@@ -1,4 +1,3 @@
-import React from 'react'
 import { createStore, combineReducers } from 'redux'
 import { DialogsReducer } from './DialogsReducer'
 import { ProfileReducer } from './ProfileReducer'

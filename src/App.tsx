@@ -1,15 +1,10 @@
 import React from 'react';
 import './App.css';
-import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
 import {Profile} from './components/Profile/Profile'
-import {Dialogs} from './components/Dialogs/Dialogs'
-import {BrowserRouter, Route} from 'react-router-dom'
-import {ProfilePageType, ProfileReducerActionTypes} from './redux/ProfileReducer';
-import {AppStateType} from './redux/rootStore';
-import {DialogsReducerActionTypes} from './redux/DialogsReducer';
+import {Route} from 'react-router-dom'
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {AppBar, Toolbar, Button, Container, IconButton, makeStyles, Typography, Grid, Paper} from '@material-ui/core';
+import {AppBar, Button, Container, Grid, IconButton, makeStyles, Paper, Toolbar, Typography} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import UsersContainer from './components/Users/UsersContainer';
 
