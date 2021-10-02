@@ -40,7 +40,8 @@ export const Users = (props: UsersPropsType) => {
                         <div className={s.nameItem}>{u.name}</div>
 
                         <div className={s.userInfoBlock}>
-                            <img className={s.userPhoto} alt='userAvatar' src={u.photos.small === null ?  'https://yt3.ggpht.com/a/AATXAJyI6-JI9qHzW3CX3PbTnj2U2zbbWu_V90qcybiEUg=s900-c-k-c0xffffffff-no-rj-mo' :  u.photos.small}/>
+                            <img className={s.userPhoto} alt='userAvatar'
+                                 src={u.photos.small === null ? 'https://yt3.ggpht.com/a/AATXAJyI6-JI9qHzW3CX3PbTnj2U2zbbWu_V90qcybiEUg=s900-c-k-c0xffffffff-no-rj-mo' : u.photos.small}/>
                             {u.followed
                                 ? <Button variant="outlined" color="primary" size="small"
                                           onClick={() => props.unFollow(u.id)}>Unfollow</Button>
@@ -53,7 +54,6 @@ export const Users = (props: UsersPropsType) => {
             })}
         </div>
     )
-
-    }
+}
 
 
