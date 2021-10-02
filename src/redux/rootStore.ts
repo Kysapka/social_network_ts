@@ -19,7 +19,8 @@ export type AppStateType = ReturnType<typeof rootReducer>
 // Creatre Redux STORE
 let rootStore = createStore(rootReducer)
 
-
+//@ts-ignore
+window.store = rootStore
 
  export default rootStore;
 

@@ -7,7 +7,7 @@ import rootStore from './redux/rootStore'
 import {BrowserRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-export let rerenderEntireTree = () => {
+// export let rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
@@ -18,11 +18,11 @@ export let rerenderEntireTree = () => {
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
+// }
 
-rerenderEntireTree();
+// rerenderEntireTree();
 
-rootStore.subscribe(rerenderEntireTree)
+// rootStore.subscribe(rerenderEntireTree)
 
 
 reportWebVitals();

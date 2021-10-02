@@ -11,8 +11,8 @@ import {DialogsReducerActionTypes} from './redux/DialogsReducer';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import {AppBar, Toolbar, Button, Container, IconButton, makeStyles, Typography, Grid, Paper} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import Users from './components/Users/Users';
-import { UsersContainer } from './components/Users/UsersContainer';
+import UsersContainer from './components/Users/UsersContainer';
+
 
 const usePaperStyles = makeStyles((theme) => ({
     root: {

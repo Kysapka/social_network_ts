@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="abd19def-bd4f-4238-b299-ee2952f95190" name="Changes" comment="Convert User component to Class for training">
+    <list default="true" id="abd19def-bd4f-4238-b299-ee2952f95190" name="Changes" comment="pagination">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/UserContainer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UserContainer.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/UsersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/UsersReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/rootStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/rootStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +57,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="CONST" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Dialogs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Users" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -57,11 +65,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\incubator\social_network_ts\src\components\Users" />
       <recent name="E:\incubator\social_network_ts\src\components\Dialogs" />
       <recent name="E:\incubator\social_network_ts\src\components\Profile\MyPosts" />
       <recent name="E:\incubator\social_network_ts\src\components\Profile" />
       <recent name="E:\incubator\social_network_ts\src\components\Dialogs\MessageItem" />
-      <recent name="E:\incubator\social_network_ts\src\components\Dialogs\DialogItem" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\incubator\social_network_ts\src\components" />
@@ -121,6 +129,9 @@
       <workItem from="1632031692639" duration="517000" />
       <workItem from="1632174605895" duration="41000" />
       <workItem from="1632510258977" duration="674000" />
+      <workItem from="1633029050243" duration="67000" />
+      <workItem from="1633118226737" duration="2165000" />
+      <workItem from="1633166640083" duration="16945000" />
     </task>
     <task id="LOCAL-00001" summary="Reduser refactoring">
       <created>1629990399674</created>
@@ -164,7 +175,28 @@
       <option name="project" value="LOCAL" />
       <updated>1631464833918</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="temp">
+      <created>1633029106056</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1633029106056</updated>
+    </task>
+    <task id="LOCAL-00008" summary="temp">
+      <created>1633118367307</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1633118367307</updated>
+    </task>
+    <task id="LOCAL-00009" summary="pagination">
+      <created>1633120872003</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1633120872003</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,7 +213,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/dev" />
                       </list>
                     </value>
                   </entry>
@@ -202,6 +234,8 @@
     <MESSAGE value="Redux type begin" />
     <MESSAGE value="Container Component" />
     <MESSAGE value="Convert User component to Class for training" />
-    <option name="LAST_COMMIT_MESSAGE" value="Convert User component to Class for training" />
+    <MESSAGE value="temp" />
+    <MESSAGE value="pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="pagination" />
   </component>
 </project>
