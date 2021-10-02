@@ -1,15 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 import {AppStateType} from '../../redux/rootStore';
 import {
-    followAC,
     initialUserPageStateType,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toogleIsFetchingAC,
-    unFollowAC,
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unFollow,
     UserType
 } from '../../redux/UsersReducer';
 import axios from 'axios';
@@ -27,7 +26,7 @@ type mapDispatchToPropsType = {
     setUsers: (items: Array<UserType>) => void
     setCurrentPage: (page: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
-    toogleIsFetching: (value: boolean) => void
+    toggleIsFetching: (value: boolean) => void
 }
 
 
@@ -36,25 +35,25 @@ class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         let baseURL = `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
 
-        this.props.toogleIsFetching(true)
+        this.props.toggleIsFetching(true)
 
         axios.get(baseURL).then(response => {
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
-        setTimeout(() => {this.props.toogleIsFetching(false)}, 2000)
+        setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
 
     onPageChanged = (event: React.ChangeEvent<unknown>, pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         let baseURL = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
 
-        this.props.toogleIsFetching(true)
+        this.props.toggleIsFetching(true)
 
         axios.get(baseURL).then(response => {
             this.props.setUsers(response.data.items)
         })
-        setTimeout(() => {this.props.toogleIsFetching(false)}, 2000)
+        setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
 
     render() {
@@ -71,7 +70,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
         </>
     }
-};
+}
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
@@ -83,28 +82,40 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        follow: (userID: number) => {
-            dispatch(followAC(userID))
-        },
-        unFollow: (userID: number) => {
-            dispatch(unFollowAC(userID))
-        },
-        setUsers: (items: Array<UserType>) => {
-            dispatch(setUsersAC(items))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(setCurrentPageAC(page))
-        },
-        setTotalUsersCount: (count: number) => {
-            dispatch(setTotalUsersCountAC(count))
-        },
-        toogleIsFetching: (value: boolean) => {
-            dispatch(toogleIsFetchingAC(value))
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+//     return {
+//         follow: (userID: number) => {
+//             dispatch(followAC(userID))
+//         },
+//         unFollow: (userID: number) => {
+//             dispatch(unFollowAC(userID))
+//         },
+//         setUsers: (items: Array<UserType>) => {
+//             dispatch(setUsersAC(items))
+//         },
+//         setCurrentPage: (page: number) => {
+//             dispatch(setCurrentPageAC(page))
+//         },
+//         setTotalUsersCount: (count: number) => {
+//             dispatch(setTotalUsersCountAC(count))
+//         },
+//         toggleIsFetching: (value: boolean) => {
+//             dispatch(toogleIsFetchingAC(value))
+//         }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps,
+
+    {
+        follow,
+        unFollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        toggleIsFetching
+    }
+
+
+)(UsersContainer)
 

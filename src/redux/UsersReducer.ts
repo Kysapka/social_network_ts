@@ -39,12 +39,12 @@ type UsersReducerActionsTypes =
     | setTotalUsersCountAT
     | toogleIsFetchingAT
 
-type followedAT = ReturnType<typeof followAC>
-type unFollowedAT = ReturnType<typeof unFollowAC>
-type setUsersAT = ReturnType<typeof setUsersAC>
-type setCurrentPageAT = ReturnType<typeof setCurrentPageAC>
-type setTotalUsersCountAT = ReturnType<typeof setTotalUsersCountAC>
-type toogleIsFetchingAT = ReturnType<typeof toogleIsFetchingAC>
+type followedAT = ReturnType<typeof follow>
+type unFollowedAT = ReturnType<typeof unFollow>
+type setUsersAT = ReturnType<typeof setUsers>
+type setCurrentPageAT = ReturnType<typeof setCurrentPage>
+type setTotalUsersCountAT = ReturnType<typeof setTotalUsersCount>
+type toogleIsFetchingAT = ReturnType<typeof toggleIsFetching>
 
 export const UsersReducer = (state: initialUserPageStateType = initialUserPageState, action: UsersReducerActionsTypes): initialUserPageStateType => {
     switch (action.type) {
@@ -65,9 +65,9 @@ export const UsersReducer = (state: initialUserPageStateType = initialUserPageSt
     }
 }
 
-export const setUsersAC = (items: Array<UserType>) => ({type: SET_USERS, items} as const)
-export const followAC = (userID: number) => ({type: FOLLOWED, userID} as const)
-export const unFollowAC = (userID: number) => ({type: UNFOLLOWED, userID} as const)
-export const setCurrentPageAC = (page: number) => ({type: SET_CURRENT_PAGE, page} as const)
-export const setTotalUsersCountAC = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count} as const)
-export const toogleIsFetchingAC = (value: boolean) => ({type: TOGGLE_IS_FETCHING, value} as const)
+export const setUsers = (items: Array<UserType>) => ({type: SET_USERS, items} as const)
+export const follow = (userID: number) => ({type: FOLLOWED, userID} as const)
+export const unFollow = (userID: number) => ({type: UNFOLLOWED, userID} as const)
+export const setCurrentPage = (page: number) => ({type: SET_CURRENT_PAGE, page} as const)
+export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count} as const)
+export const toggleIsFetching = (value: boolean) => ({type: TOGGLE_IS_FETCHING, value} as const)
