@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import {Navbar} from './components/Navbar/Navbar'
-import {Profile} from './components/Profile/Profile'
 import {Route} from 'react-router-dom'
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import {AppBar, Button, Container, Grid, IconButton, makeStyles, Paper, Toolbar, Typography} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 const usePaperStyles = makeStyles((theme) => ({
@@ -60,7 +60,7 @@ export const App = () => {
                        </Grid>
                        <Grid item xs={9}>
                            <Paper className={PaperClasses.paper} style={{height: "100%"}}>
-                               <Route path="/profile" render={() => <Profile />}/>
+                               <Route path="/profile" render={() => <ProfileContainer />}/>
                                <Route path="/users" render={() => <UsersContainer />}/>
                                <Route path="/dialogs" render={() => <DialogsContainer />}/>
                            </Paper>
