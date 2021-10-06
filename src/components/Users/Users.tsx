@@ -5,6 +5,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {UserType} from '../../redux/UsersReducer';
 import {NavLink} from 'react-router-dom';
+import axios from "axios";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -47,9 +48,38 @@ export const Users = (props: UsersPropsType) => {
                             </NavLink>
                             {u.followed
                                 ? <Button variant="outlined" color="primary" size="small"
-                                          onClick={() => props.unFollow(u.id)}>Unfollow</Button>
+                                          onClick={() => {
+
+                                              axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {
+                                                  withCredentials: true,
+                                                  headers: {
+                                                      "API-KEY" : "9660a6e9-744c-4376-8717-32b82016bc28"
+                                                  }
+                                              })
+                                                  .then((response) => {
+                                                      console.log(response.data.resultCode)
+                                                      props.unFollow(u.id)
+                                                  })
+
+                                          }
+                                          }>Unfollow</Button>
                                 : <Button variant="outlined" color="primary" size="small"
-                                          onClick={() => props.follow(u.id)}>Follow</Button>}
+                                          onClick={() => {
+
+                                              axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {} ,{
+                                                  withCredentials: true,
+                                                  headers: {
+                                                  "API-KEY" : "9660a6e9-744c-4376-8717-32b82016bc28"
+                                              }
+                                              })
+                                                  .then((response) => {
+                                                      console.log(response.data.resultCode)
+                                                      props.follow(u.id)
+                                                  })
+
+
+
+                                          }}>Follow</Button>}
                         </div>
 
                     </Paper>

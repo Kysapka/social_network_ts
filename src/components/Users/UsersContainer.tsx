@@ -37,7 +37,9 @@ class UsersContainer extends React.Component<UsersConnectPropsType> {
 
         this.props.toggleIsFetching(true)
 
-        axios.get(baseURL).then(response => {
+        axios.get(baseURL, {
+                    withCredentials: true
+                }).then(response => {
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
@@ -50,7 +52,9 @@ class UsersContainer extends React.Component<UsersConnectPropsType> {
 
         this.props.toggleIsFetching(true)
 
-        axios.get(baseURL).then(response => {
+        axios.get(baseURL, {
+                    withCredentials: true
+                }).then(response => {
             this.props.setUsers(response.data.items)
         })
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
