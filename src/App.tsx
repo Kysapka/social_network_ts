@@ -3,23 +3,12 @@ import './App.css';
 import {Navbar} from './components/Navbar/Navbar'
 import {Route} from 'react-router-dom'
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {AppBar, Button, Container, Grid, IconButton, makeStyles, Paper, Toolbar, Typography} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import {Container, Grid, makeStyles, Paper} from '@material-ui/core';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
-
-const usePaperStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'left',
-        color: theme.palette.text.secondary,
-    },
-}));
-const useGridStyles = makeStyles((theme) => ({
+export const useGridStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
@@ -30,27 +19,25 @@ const useGridStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
 }));
+const usePaperStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'left',
+        color: theme.palette.text.secondary,
+    },
+}));
 
 export const App = () => {
-    const GridClasses = useGridStyles();
-    const PaperClasses = usePaperStyles();
 
+    const PaperClasses = usePaperStyles();
+    const GridClasses = useGridStyles();
 
     return (
            <Container fixed>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton edge="start" className={GridClasses.menuButton} color="inherit"
-                                    aria-label="menu">
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography variant="h6" className={GridClasses.title}>
-                            News
-                        </Typography>
-                        <Button color="inherit">Login</Button>
-                    </Toolbar>
-                </AppBar>
-
+               <HeaderContainer />
                <div className={GridClasses.root}>
                    <Grid container spacing={0}>
                        <Grid item xs>
@@ -60,7 +47,7 @@ export const App = () => {
                        </Grid>
                        <Grid item xs={9}>
                            <Paper className={PaperClasses.paper} style={{height: "100%"}}>
-                               <Route path="/profile" render={() => <ProfileContainer />}/>
+                               <Route path="/profile/:userId?" render={() => <ProfileContainer />}/>
                                <Route path="/users" render={() => <UsersContainer />}/>
                                <Route path="/dialogs" render={() => <DialogsContainer />}/>
                            </Paper>

@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/rootStore';
 import {
-    initialUserPageStateType,
     follow,
+    initialUserPageStateType,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
@@ -16,7 +16,7 @@ import {Users} from './Users';
 import Loader from '../Loader';
 
 
-export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
+type UsersConnectPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 type mapStateToPropsType = initialUserPageStateType
 
@@ -29,10 +29,10 @@ type mapDispatchToPropsType = {
     toggleIsFetching: (value: boolean) => void
 }
 
-
-class UsersContainer extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersConnectPropsType> {
 
     componentDidMount() {
+
         let baseURL = `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
 
         this.props.toggleIsFetching(true)
@@ -81,6 +81,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
+
+
 
 export default connect(mapStateToProps,
 

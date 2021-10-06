@@ -6,14 +6,21 @@ import {AppStateType} from "../../redux/rootStore";
 import {toggleIsFetching} from "../../redux/UsersReducer";
 import {setUserProfile, userProfileType} from "../../redux/ProfileReducer";
 import Loader from "../Loader";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
-class ProfileContainer extends React.Component<ProfileStatePropsType> {
+type ownWithRouterPropsType = {
+    userId: string
+}
+export type ProfilePropsType = RouteComponentProps<ownWithRouterPropsType> & ProfileStatePropsType
+
+
+class ProfileContainer extends React.Component<ProfilePropsType> {
 
     componentDidMount() {
-        let baseURL = `https://social-network.samuraijs.com/api/1.0/profile/2`
+        let userId = this.props.match.params.userId || 2
+        let baseURL = `https://social-network.samuraijs.com/api/1.0/profile/${userId}`
         this.props.toggleIsFetching(true)
         axios.get(baseURL).then(response => {
-            console.log(response.data)
             this.props.setUserProfile(response.data)
         })
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
@@ -30,20 +37,19 @@ type mapStateToPropsType = {
     isFetching: boolean
     profile: userProfileType
 }
-
 type mapDispatchPropsType = {
     toggleIsFetching: (value: boolean) => void
     setUserProfile: (profile: userProfileType) => void
 }
+
 
 const mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
     isFetching: state.usersPage.isFetching,
     profile: state.profilePage.profile
 })
 
-
-
+const WithRouterUsersComponent = withRouter(ProfileContainer)
 export default connect(mapStateToProps, {
     toggleIsFetching,
     setUserProfile
-})(ProfileContainer)
+})(WithRouterUsersComponent)

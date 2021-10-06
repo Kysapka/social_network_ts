@@ -18,7 +18,8 @@ export const ProfileInfo: React.FC<ProfilePropsType> = ({profile, ...props}) => 
             {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <div className={s.ProfileContent}>
-                    <div><img src={profile.photos.large && profile.photos.large} /></div>
+                    {/*<div><img src={profile.photos.large && profile.photos.large} /></div>*/}
+                    <div><img src={profile.photos.large === null ? 'https://yt3.ggpht.com/a/AATXAJyI6-JI9qHzW3CX3PbTnj2U2zbbWu_V90qcybiEUg=s900-c-k-c0xffffffff-no-rj-mo' : profile.photos.large} /></div>
                     <div>{profile.aboutMe}</div>
                     <div>{profile.fullName}</div>
                     <div>{profile.lookingForAJob}</div>
