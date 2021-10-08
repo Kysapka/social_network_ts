@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import {UserType} from '../../redux/UsersReducer';
 import {NavLink} from 'react-router-dom';
 import axios from "axios";
+import {usersAPI} from "../../bll/API";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -23,9 +24,21 @@ export const Users = (props: UsersPropsType) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
+
+    const setFollowHandler = (userId: number) => {
+        usersAPI.follow(userId).then(resultCode => {
+            resultCode === 0 ? props.follow(userId) : console.warn('SERVER NOT RESPONSE...')
+        })
+    }
+    const setUnfollowHandler = (userId: number) => {
+        usersAPI.unFollow(userId).then(resultCode => {
+            resultCode === 0 ? props.unFollow(userId) : console.warn('SERVER NOT RESPONSE...')
+        })
+    }
+
     return (
         <div className={s.userContainer}>
-
             <div className={s.paginator}>
                 <Stack spacing={2}>
                     <Pagination variant="outlined" shape="rounded" count={pagesCount} color="primary"
@@ -38,9 +51,7 @@ export const Users = (props: UsersPropsType) => {
             {props.users.map(u => {
                 return (
                     <Paper key={u.id} className={s.userItem}>
-
                         <div className={s.nameItem}>{u.name}</div>
-
                         <div className={s.userInfoBlock}>
                             <NavLink to={`/profile/${u.id}`}>
                                 <img className={s.userPhoto} alt='userAvatar'
@@ -48,38 +59,11 @@ export const Users = (props: UsersPropsType) => {
                             </NavLink>
                             {u.followed
                                 ? <Button variant="outlined" color="primary" size="small"
-                                          onClick={() => {
+                                          onClick={() => setUnfollowHandler(u.id)}>Unfollow</Button>
 
-                                              axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {
-                                                  withCredentials: true,
-                                                  headers: {
-                                                      "API-KEY" : "9660a6e9-744c-4376-8717-32b82016bc28"
-                                                  }
-                                              })
-                                                  .then((response) => {
-                                                      console.log(response.data.resultCode)
-                                                      props.unFollow(u.id)
-                                                  })
-
-                                          }
-                                          }>Unfollow</Button>
                                 : <Button variant="outlined" color="primary" size="small"
-                                          onClick={() => {
-
-                                              axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {} ,{
-                                                  withCredentials: true,
-                                                  headers: {
-                                                  "API-KEY" : "9660a6e9-744c-4376-8717-32b82016bc28"
-                                              }
-                                              })
-                                                  .then((response) => {
-                                                      console.log(response.data.resultCode)
-                                                      props.follow(u.id)
-                                                  })
-
-
-
-                                          }}>Follow</Button>}
+                                          onClick={() => setFollowHandler(u.id)}>Follow</Button>
+                            }
                         </div>
 
                     </Paper>

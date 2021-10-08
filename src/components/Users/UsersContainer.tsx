@@ -14,10 +14,10 @@ import {
 import axios from 'axios';
 import {Users} from './Users';
 import Loader from '../Loader';
+import {usersAPI} from "../../bll/API";
 
 
 type UsersConnectPropsType = mapStateToPropsType & mapDispatchToPropsType
-
 type mapStateToPropsType = initialUserPageStateType
 
 type mapDispatchToPropsType = {
@@ -32,31 +32,22 @@ type mapDispatchToPropsType = {
 class UsersContainer extends React.Component<UsersConnectPropsType> {
 
     componentDidMount() {
-
-        let baseURL = `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-
         this.props.toggleIsFetching(true)
-
-        axios.get(baseURL, {
-                    withCredentials: true
-                }).then(response => {
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+            })
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
 
     onPageChanged = (event: React.ChangeEvent<unknown>, pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
-        let baseURL = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-
         this.props.toggleIsFetching(true)
-
-        axios.get(baseURL, {
-                    withCredentials: true
-                }).then(response => {
-            this.props.setUsers(response.data.items)
-        })
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items)
+            })
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
 
@@ -86,10 +77,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-
-
 export default connect(mapStateToProps,
-
     {
         follow,
         unFollow,
@@ -97,8 +85,5 @@ export default connect(mapStateToProps,
         setCurrentPage,
         setTotalUsersCount,
         toggleIsFetching
-    }
-
-
-)(UsersContainer)
+    })(UsersContainer)
 
