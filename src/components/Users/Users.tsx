@@ -5,7 +5,6 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {UserType} from '../../redux/UsersReducer';
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
 import {usersAPI} from "../../bll/API";
 
 type UsersPropsType = {
@@ -16,6 +15,8 @@ type UsersPropsType = {
     onPageChanged: (event: React.ChangeEvent<unknown>, pageNumber: number) => void
     follow: (userID: number) => void
     unFollow: (userID: number) => void
+    followingInProgress: number[]
+    toggleFollowing: (isFetching: boolean, userId: number) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -27,13 +28,18 @@ export const Users = (props: UsersPropsType) => {
 
 
     const setFollowHandler = (userId: number) => {
+        props.toggleFollowing(true, userId)
         usersAPI.follow(userId).then(resultCode => {
-            resultCode === 0 ? props.follow(userId) : console.warn('SERVER NOT RESPONSE...')
+            props.follow(userId)
+            props.toggleFollowing(false, userId)
         })
     }
+
     const setUnfollowHandler = (userId: number) => {
+        props.toggleFollowing(true, userId)
         usersAPI.unFollow(userId).then(resultCode => {
-            resultCode === 0 ? props.unFollow(userId) : console.warn('SERVER NOT RESPONSE...')
+            props.unFollow(userId)
+            props.toggleFollowing(false, userId)
         })
     }
 
@@ -59,9 +65,11 @@ export const Users = (props: UsersPropsType) => {
                             </NavLink>
                             {u.followed
                                 ? <Button variant="outlined" color="primary" size="small"
+                                          disabled={props.followingInProgress.some(el => el === u.id)}
                                           onClick={() => setUnfollowHandler(u.id)}>Unfollow</Button>
 
                                 : <Button variant="outlined" color="primary" size="small"
+                                          disabled={props.followingInProgress.some(el => el === u.id)}
                                           onClick={() => setFollowHandler(u.id)}>Follow</Button>
                             }
                         </div>

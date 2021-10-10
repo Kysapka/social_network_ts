@@ -8,21 +8,25 @@ const instanceUsersApi = axios.create({
     }
 })
 
-export const usersAPI = {
-    getUsers: (currentPage: number =  1, pageSize: number = 10) => {
-        return instanceUsersApi.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => {
-            return response.data
-        })
-    },
-    unFollow: (userId: number) => {
-        return instanceUsersApi.delete(`follow/${userId}`)
-            .then(response => response.data.resultCode)
-    },
-    follow: (userId: number) => {
-        return instanceUsersApi.post(`follow/${userId}`, {})
-            .then(response => response.data.resultCode)
+export const authAPI = {
+    autorizatedMe: () => instanceUsersApi.get(`auth/me`)
+        .then(response => response.data.data)
+        .catch(err => console.warn('NOT AUTORIZED, SERVER NOT RESPONSE...'))
     }
+
+export const usersAPI = {
+    getUsers: (currentPage: number =  1, pageSize: number = 10) => instanceUsersApi.get(`users?page=${currentPage}&count=${pageSize}`)
+        .then(response => response.data )
+        .catch(err => console.warn('USERS NOT RECIVED, SERVER NOT RESPONSE...')),
+    follow: (userId: number) => instanceUsersApi.post(`follow/${userId}`)
+        .then(response => response.data.resultCode)
+        .catch(err => console.warn('USER NOT FOLLOW, SERVER NOT RESPONSE...')),
+    unFollow: (userId: number) => instanceUsersApi.delete(`follow/${userId}`)
+        .then(response => response.data.resultCode)
+        .catch(err => console.warn('USER NOT UNFOLLOW, SERVER NOT RESPONSE...')),
+    setProfile: (userId: number | string) => instanceUsersApi.get(`profile/${userId}`)
+        .then(response => response.data)
+        .catch(err => console.warn('PROFILE NOT SETTED, SERVER NOT RESPONSE...')),
 }
 
 
