@@ -9,24 +9,24 @@ const instanceUsersApi = axios.create({
 })
 
 export const authAPI = {
-    autorizatedMe: () => instanceUsersApi.get(`auth/me`)
+    authorizationMe: () => instanceUsersApi.get(`auth/me`)
         .then(response => response.data.data)
-        .catch(err => console.warn('NOT AUTORIZED, SERVER NOT RESPONSE...'))
+        .catch((err) => console.warn('NOT authorization, SERVER NOT RESPONSE...' + err))
     }
 
 export const usersAPI = {
     getUsers: (currentPage: number =  1, pageSize: number = 10) => instanceUsersApi.get(`users?page=${currentPage}&count=${pageSize}`)
         .then(response => response.data )
-        .catch(err => console.warn('USERS NOT RECIVED, SERVER NOT RESPONSE...')),
+        .catch(err => console.warn('USERS NOT RECEIVED, SERVER NOT RESPONSE...' + err)),
     follow: (userId: number) => instanceUsersApi.post(`follow/${userId}`)
         .then(response => response.data.resultCode)
-        .catch(err => console.warn('USER NOT FOLLOW, SERVER NOT RESPONSE...')),
+        .catch(err => console.warn('USER NOT FOLLOW, SERVER NOT RESPONSE...' + err)),
     unFollow: (userId: number) => instanceUsersApi.delete(`follow/${userId}`)
         .then(response => response.data.resultCode)
-        .catch(err => console.warn('USER NOT UNFOLLOW, SERVER NOT RESPONSE...')),
+        .catch(err => console.warn('USER NOT UNFOLLOW, SERVER NOT RESPONSE...' + err)),
     setProfile: (userId: number | string) => instanceUsersApi.get(`profile/${userId}`)
         .then(response => response.data)
-        .catch(err => console.warn('PROFILE NOT SETTED, SERVER NOT RESPONSE...')),
+        .catch(err => console.warn('PROFILE NOT SET, SERVER NOT RESPONSE...' + err)),
 }
 
 

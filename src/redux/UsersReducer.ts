@@ -1,3 +1,8 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../bll/API";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "./rootStore";
+
 const FOLLOWED = 'FOLLOWED'
 const UNFOLLOWED = 'UNFOLLOWED'
 const SET_USERS = 'SET_USERS'
@@ -82,3 +87,16 @@ export const setCurrentPage = (page: number) => ({type: SET_CURRENT_PAGE, page} 
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count} as const)
 export const toggleIsFetching = (value: boolean) => ({type: TOGGLE_IS_FETCHING, value} as const)
 export const toggleFollowing = (isFetching: boolean, userId: number) => ({type: TOGGLE_FOLLOWING_PROPGRESS, isFetching, userId} as const )
+
+export const getUsers = (currentPage: number, pageSize: number):ThunkAction<void, AppStateType, unknown, UsersReducerActionsTypes> =>
+    (dispatch: ThunkDispatch<AppStateType, undefined, UsersReducerActionsTypes>) => {
+    dispatch(toggleIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
+        .catch(err => console.log('Loading users error... ' + err))
+        // Иммитация задержки чтобы увидеть крутилку
+    setTimeout(() => {dispatch(toggleIsFetching(false))}, 500)
+}

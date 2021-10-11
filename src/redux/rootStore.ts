@@ -1,8 +1,9 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { DialogsReducer } from './DialogsReducer'
 import { ProfileReducer } from './ProfileReducer'
 import { UsersReducer } from './UsersReducer'
 import {AuthReducer} from "./AuthReducer";
+import thunk from "redux-thunk";
 
 
 
@@ -18,7 +19,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 
 
 // Creatre Redux STORE
-let rootStore = createStore(rootReducer)
+let rootStore = createStore(rootReducer, applyMiddleware(thunk))
 
 //@ts-ignore
 window.store = rootStore

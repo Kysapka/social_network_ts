@@ -8,7 +8,7 @@ import {authAPI} from "../../bll/API";
 class HeaderContainer extends React.Component<HeaderOwnPropsType> {
 
     componentDidMount() {
-            authAPI.autorizatedMe().then(data => {
+            authAPI.authorizationMe().then(data => {
                 this.props.setAuth(data)
             })
         }
