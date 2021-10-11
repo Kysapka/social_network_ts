@@ -49,8 +49,8 @@ type UsersReducerActionsTypes =
     | toogleIsFetchingAT
     | toggleFollowingAT
 
-type followedAT = ReturnType<typeof follow>
-type unFollowedAT = ReturnType<typeof unFollow>
+type followedAT = ReturnType<typeof followAC>
+type unFollowedAT = ReturnType<typeof unFollowAC>
 type setUsersAT = ReturnType<typeof setUsers>
 type setCurrentPageAT = ReturnType<typeof setCurrentPage>
 type setTotalUsersCountAT = ReturnType<typeof setTotalUsersCount>
@@ -70,7 +70,7 @@ export const UsersReducer = (state: initialUserPageStateType = initialUserPageSt
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.count}
         case TOGGLE_IS_FETCHING:
-            return  {...state, isFetching: action.value}
+            return {...state, isFetching: action.value}
         case TOGGLE_FOLLOWING_PROPGRESS:
             return action.isFetching
                 ? {...state, followingInProgress: [...state.followingInProgress, action.userId]}
@@ -81,22 +81,51 @@ export const UsersReducer = (state: initialUserPageStateType = initialUserPageSt
 }
 
 export const setUsers = (items: Array<UserType>) => ({type: SET_USERS, items} as const)
-export const follow = (userID: number) => ({type: FOLLOWED, userID} as const)
-export const unFollow = (userID: number) => ({type: UNFOLLOWED, userID} as const)
+export const followAC = (userID: number) => ({type: FOLLOWED, userID} as const)
+export const unFollowAC = (userID: number) => ({type: UNFOLLOWED, userID} as const)
 export const setCurrentPage = (page: number) => ({type: SET_CURRENT_PAGE, page} as const)
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count} as const)
 export const toggleIsFetching = (value: boolean) => ({type: TOGGLE_IS_FETCHING, value} as const)
-export const toggleFollowing = (isFetching: boolean, userId: number) => ({type: TOGGLE_FOLLOWING_PROPGRESS, isFetching, userId} as const )
+export const toggleFollowing = (isFetching: boolean, userId: number) => ({
+    type: TOGGLE_FOLLOWING_PROPGRESS,
+    isFetching,
+    userId
+} as const)
 
-export const getUsers = (currentPage: number, pageSize: number):ThunkAction<void, AppStateType, unknown, UsersReducerActionsTypes> =>
+
+// THUNK`s
+export const getUsers = (currentPage: number, pageSize: number): ThunkAction<void, AppStateType, unknown, UsersReducerActionsTypes> =>
     (dispatch: ThunkDispatch<AppStateType, undefined, UsersReducerActionsTypes>) => {
-    dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize)
-        .then(data => {
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))
-        })
-        .catch(err => console.log('Loading users error... ' + err))
+        dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+            })
+            .catch(err => console.warn('Loading users error... ' + err))
         // Иммитация задержки чтобы увидеть крутилку
-    setTimeout(() => {dispatch(toggleIsFetching(false))}, 500)
+        setTimeout(() => {
+            dispatch(toggleIsFetching(false))
+        }, 500)
+    }
+
+export const follow = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowing(true, userId))
+    usersAPI.follow(userId)
+        .then(() => {
+            dispatch(followAC(userId))
+            dispatch(toggleFollowing(false, userId))
+        })
+        .catch(err => console.warn('Following user failed... ' + err))
+}
+
+export const unFollow = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowing(true, userId))
+    usersAPI.unFollow(userId)
+        .then(() => {
+            dispatch(unFollowAC(userId))
+            dispatch(toggleFollowing(false, userId))
+        })
+        .catch(err => console.warn('Following user failed... ' + err))
 }

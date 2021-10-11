@@ -5,7 +5,6 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {UserType} from '../../redux/UsersReducer';
 import {NavLink} from 'react-router-dom';
-import {usersAPI} from "../../bll/API";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -16,7 +15,6 @@ type UsersPropsType = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     followingInProgress: number[]
-    toggleFollowing: (isFetching: boolean, userId: number) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -24,23 +22,6 @@ export const Users = (props: UsersPropsType) => {
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
-    }
-
-
-    const setFollowHandler = (userId: number) => {
-        props.toggleFollowing(true, userId)
-        usersAPI.follow(userId).then(resultCode => {
-            props.follow(userId)
-            props.toggleFollowing(false, userId)
-        })
-    }
-
-    const setUnfollowHandler = (userId: number) => {
-        props.toggleFollowing(true, userId)
-        usersAPI.unFollow(userId).then(resultCode => {
-            props.unFollow(userId)
-            props.toggleFollowing(false, userId)
-        })
     }
 
     return (
@@ -66,19 +47,16 @@ export const Users = (props: UsersPropsType) => {
                             {u.followed
                                 ? <Button variant="outlined" color="primary" size="small"
                                           disabled={props.followingInProgress.some(el => el === u.id)}
-                                          onClick={() => setUnfollowHandler(u.id)}>Unfollow</Button>
+                                          onClick={() => props.unFollow(u.id)}>Unfollow</Button>
 
                                 : <Button variant="outlined" color="primary" size="small"
                                           disabled={props.followingInProgress.some(el => el === u.id)}
-                                          onClick={() => setFollowHandler(u.id)}>Follow</Button>
+                                          onClick={() => props.follow(u.id)}>Follow</Button>
                             }
                         </div>
-
                     </Paper>
                 )
             })}
         </div>
     )
 }
-
-
