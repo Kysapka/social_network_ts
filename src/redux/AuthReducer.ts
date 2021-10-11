@@ -1,3 +1,7 @@
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "./rootStore";
+import {authAPI} from "../bll/API";
+
 const SET_AUTH = 'SET_AUTH'
 
 export type AuthStateType = {
@@ -10,8 +14,7 @@ export type AuthStateType = {
 export type AuthActionTypes =
     setAuthAT
 
-
-type setAuthAT = ReturnType<typeof setAuth>
+type setAuthAT = ReturnType<typeof setAuthAC>
 
 
 const initAuthState: AuthStateType = {
@@ -35,5 +38,14 @@ export const AuthReducer = (state: AuthStateType = initAuthState, action: AuthAc
     }
 }
 
-export const setAuth = (payload: AuthStateType) => ({type: SET_AUTH, payload} as const)
+export const setAuthAC = (payload: AuthStateType) => ({type: SET_AUTH, payload} as const)
+
+export const setAuth = ():ThunkAction<void, AppStateType, unknown, AuthActionTypes> =>
+    (dispatch: ThunkDispatch<AppStateType, undefined, AuthActionTypes>) => {
+        authAPI.authorizationMe()
+            .then(data => {
+            dispatch(setAuthAC(data))
+        })
+            .catch(err => console.log('Autorization failed... ' + err))
+}
 

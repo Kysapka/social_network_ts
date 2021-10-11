@@ -3,14 +3,11 @@ import {Header} from "./Header";
 import {AuthStateType, setAuth} from "../../redux/AuthReducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/rootStore";
-import {authAPI} from "../../bll/API";
 
 class HeaderContainer extends React.Component<HeaderOwnPropsType> {
 
     componentDidMount() {
-            authAPI.authorizationMe().then(data => {
-                this.props.setAuth(data)
-            })
+            this.props.setAuth()
         }
 
     render() {
@@ -19,9 +16,12 @@ class HeaderContainer extends React.Component<HeaderOwnPropsType> {
 }
 
 export type HeaderOwnPropsType = mapStateToPropsType & mapDispatchPropsType
+
 type mapStateToPropsType = AuthStateType
+
 type mapDispatchPropsType = {
-    setAuth: (data: AuthStateType) => void
+    setAuth: () => void
 }
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({...state.auth})
+
 export default connect(mapStateToProps, {setAuth})(HeaderContainer)
