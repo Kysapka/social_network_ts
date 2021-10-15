@@ -10,7 +10,6 @@ import {withAuthRedirect} from "../hoc/withRedirect";
 type UsersConnectPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 type mapStateToPropsType = initialUserPageStateType
-    // & {isAuth: boolean}
 
 type mapDispatchToPropsType = {
     follow: (userID: number) => void
@@ -29,9 +28,6 @@ class UsersContainer extends React.Component<UsersConnectPropsType> {
     }
 
     render() {
-        // if (!this.props.isAuth) {
-        //     return <Redirect to={"/login"}/>
-        // }
         return <>
               { this.props.isFetching ? <Loader /> : <Users
                 users={this.props.users}
