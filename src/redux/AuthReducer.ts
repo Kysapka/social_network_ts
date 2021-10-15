@@ -5,10 +5,10 @@ import {authAPI} from "../bll/API";
 const SET_AUTH = 'SET_AUTH'
 
 export type AuthStateType = {
-    email: string | null
-    id: number | null
-    login: string | null
-    isAuth: boolean
+        email: string | null
+        id: number | null
+        login: string | null
+        isAuth: boolean
 }
 
 export type AuthActionTypes =
@@ -17,11 +17,11 @@ export type AuthActionTypes =
 type setAuthAT = ReturnType<typeof setAuthAC>
 
 
-const initAuthState: AuthStateType = {
-    email: null,
-    id: null,
-    login: null,
-    isAuth: false,
+export const initAuthState: AuthStateType = {
+        email: null,
+        id: null,
+        login: null,
+        isAuth: false,
 }
 
 
@@ -44,7 +44,9 @@ export const setAuth = ():ThunkAction<void, AppStateType, unknown, AuthActionTyp
     (dispatch: ThunkDispatch<AppStateType, undefined, AuthActionTypes>) => {
         authAPI.authorizationMe()
             .then(data => {
-            dispatch(setAuthAC(data))
+                if (data.resultCode === 0) {
+                    dispatch(setAuthAC(data.data))
+                }
         })
             .catch(err => console.log('Autorization failed... ' + err))
 }

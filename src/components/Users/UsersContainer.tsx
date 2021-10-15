@@ -4,10 +4,13 @@ import {AppStateType} from '../../redux/rootStore';
 import {follow, getUsers,initialUserPageStateType,unFollow} from '../../redux/UsersReducer';
 import {Users} from './Users';
 import Loader from '../Loader';
+import {withAuthRedirect} from "../hoc/withRedirect";
+
 
 type UsersConnectPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 type mapStateToPropsType = initialUserPageStateType
+    // & {isAuth: boolean}
 
 type mapDispatchToPropsType = {
     follow: (userID: number) => void
@@ -26,8 +29,11 @@ class UsersContainer extends React.Component<UsersConnectPropsType> {
     }
 
     render() {
+        // if (!this.props.isAuth) {
+        //     return <Redirect to={"/login"}/>
+        // }
         return <>
-            {this.props.isFetching ? <Loader /> : <Users
+              { this.props.isFetching ? <Loader /> : <Users
                 users={this.props.users}
                 totalUsersCount={this.props.totalUsersCount}
                 currentPage={this.props.currentPage}
@@ -49,10 +55,12 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        // isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps,
-    {follow, unFollow, getUsers})(UsersContainer)
+let withRedirectUserContainer = withAuthRedirect(UsersContainer)
+
+export default connect(mapStateToProps,    {follow, unFollow, getUsers})(withRedirectUserContainer)
 

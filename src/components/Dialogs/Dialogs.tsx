@@ -3,6 +3,7 @@ import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 import {Button, Grid, makeStyles, Paper, TextField} from '@material-ui/core';
 import {DialogsPropsType} from './DialogsContainer'
+import {Redirect} from "react-router-dom";
 
 const useGridStyles = makeStyles((theme) => ({
     root: {
@@ -28,6 +29,10 @@ export const Dialogs = React.memo((props: DialogsPropsType) => {
     let onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeHandler(e.currentTarget.value)
     }
+
+    // if (!props.isAuth) {
+    //     return <Redirect to={"/login"}/>
+    // }
 
     return (
         <div className={useGridClasses.root}>

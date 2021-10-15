@@ -7,6 +7,7 @@ import {Container, Grid, makeStyles, Paper} from '@material-ui/core';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 export const useGridStyles = makeStyles((theme) => ({
     root: {
@@ -47,6 +48,7 @@ export const App = () => {
                        </Grid>
                        <Grid item xs={9}>
                            <Paper className={PaperClasses.paper} style={{height: "100%"}}>
+                               <Route path="/login" render={() => <Login />}/>
                                <Route path="/profile/:userId?" render={() => <ProfileContainer />}/>
                                <Route path="/users" render={() => <UsersContainer />}/>
                                <Route path="/dialogs" render={() => <DialogsContainer />}/>

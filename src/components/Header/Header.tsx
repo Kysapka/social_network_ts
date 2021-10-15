@@ -9,7 +9,7 @@ type HeaderPropsType = HeaderOwnPropsType
 export const Header = (props: HeaderPropsType) => {
 
     const GridClasses = useGridStyles();
-
+    console.log(props.login)
     return (
         <AppBar position="static">
             <Toolbar>

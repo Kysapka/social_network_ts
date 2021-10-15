@@ -7,6 +7,7 @@ import {setUserProfile, userProfileType} from "../../redux/ProfileReducer";
 import Loader from "../Loader";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {usersAPI} from "../../bll/API";
+import {withAuthRedirect} from "../hoc/withRedirect";
 
 type ownWithRouterPropsType = {
     userId: string
@@ -47,7 +48,9 @@ const mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
 })
 
 const WithRouterUsersComponent = withRouter(ProfileContainer)
+const withAuthRedirectUsers = withAuthRedirect(WithRouterUsersComponent)
+
 export default connect(mapStateToProps, {
     toggleIsFetching,
     setUserProfile
-})(WithRouterUsersComponent)
+})(withAuthRedirectUsers)

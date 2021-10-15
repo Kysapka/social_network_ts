@@ -10,7 +10,7 @@ const instanceUsersApi = axios.create({
 
 export const authAPI = {
     authorizationMe: () => instanceUsersApi.get(`auth/me`)
-        .then(response => response.data.data)
+        .then(response => response.data)
         .catch((err) => console.warn('NOT authorization, SERVER NOT RESPONSE...' + err))
     }
 
