@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/rootStore";
 
 class HeaderContainer extends React.Component<HeaderOwnPropsType> {
-
     componentDidMount() {
             this.props.setAuth()
         }
