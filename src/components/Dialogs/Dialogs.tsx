@@ -3,7 +3,6 @@ import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 import {Button, Grid, makeStyles, Paper, TextField} from '@material-ui/core';
 import {DialogsPropsType} from './DialogsContainer'
-import {Redirect} from "react-router-dom";
 
 const useGridStyles = makeStyles((theme) => ({
     root: {

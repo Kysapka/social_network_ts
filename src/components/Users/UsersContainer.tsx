@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/rootStore';
 import {follow, getUsers,initialUserPageStateType,unFollow} from '../../redux/UsersReducer';
 import {Users} from './Users';
 import Loader from '../Loader';
 import {withAuthRedirect} from "../hoc/withRedirect";
-
+import {compose} from "redux";
 
 type UsersConnectPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -52,11 +52,11 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        // isAuth: state.auth.isAuth
     }
 }
 
-let withRedirectUserContainer = withAuthRedirect(UsersContainer)
-
-export default connect(mapStateToProps,    {follow, unFollow, getUsers})(withRedirectUserContainer)
+export default compose<ComponentType>(
+    connect(mapStateToProps,    {follow, unFollow, getUsers}),
+    withAuthRedirect
+)(UsersContainer)
 

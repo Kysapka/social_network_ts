@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/rootStore";
@@ -8,6 +8,7 @@ import Loader from "../Loader";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {usersAPI} from "../../bll/API";
 import {withAuthRedirect} from "../hoc/withRedirect";
+import {compose} from "redux";
 
 type ownWithRouterPropsType = {
     userId: string
@@ -47,10 +48,8 @@ const mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
     profile: state.profilePage.profile
 })
 
-const WithRouterUsersComponent = withRouter(ProfileContainer)
-const withAuthRedirectUsers = withAuthRedirect(WithRouterUsersComponent)
-
-export default connect(mapStateToProps, {
-    toggleIsFetching,
-    setUserProfile
-})(withAuthRedirectUsers)
+export default compose<ComponentType>(
+    connect(mapStateToProps, {toggleIsFetching,setUserProfile}),
+    withAuthRedirect,
+    withRouter,
+)(ProfileContainer)
