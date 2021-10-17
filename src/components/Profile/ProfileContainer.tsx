@@ -1,6 +1,6 @@
 import React, {ComponentType} from 'react';
 import {Profile} from "./Profile";
-import {connect} from "react-redux";
+import {connect, ConnectedProps} from "react-redux";
 import {AppStateType} from "../../redux/rootStore";
 import {toggleIsFetching} from "../../redux/UsersReducer";
 import {setUserProfile, userProfileType} from "../../redux/ProfileReducer";
@@ -31,25 +31,28 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     }
 }
 
-type ProfileStatePropsType = mapStateToPropsType & mapDispatchPropsType
+type ProfileStatePropsType = ConnectedProps<typeof connectComp>
 
-type mapStateToPropsType = {
-    isFetching: boolean
-    profile: userProfileType
-}
-type mapDispatchPropsType = {
-    toggleIsFetching: (value: boolean) => void
-    setUserProfile: (profile: userProfileType) => void
-}
+// mapStateToPropsType & mapDispatchPropsType
 
+// type mapStateToPropsType = {
+//     isFetching: boolean
+//     profile: userProfileType
+// }
 
-const mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
+// type mapDispatchPropsType = {
+//     toggleIsFetching: (value: boolean) => void
+//     setUserProfile: (profile: userProfileType) => void
+// }
+
+const mapStateToProps = (state: AppStateType) => ({
     isFetching: state.usersPage.isFetching,
     profile: state.profilePage.profile
 })
 
+let connectComp = connect(mapStateToProps, {toggleIsFetching,setUserProfile})
 export default compose<ComponentType>(
-    connect(mapStateToProps, {toggleIsFetching,setUserProfile}),
-    withAuthRedirect,
+    connectComp,
+    // withAuthRedirect,
     withRouter,
 )(ProfileContainer)
