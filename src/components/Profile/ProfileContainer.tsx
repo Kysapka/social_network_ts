@@ -33,17 +33,6 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 type ProfileStatePropsType = ConnectedProps<typeof connectComp>
 
-// mapStateToPropsType & mapDispatchPropsType
-
-// type mapStateToPropsType = {
-//     isFetching: boolean
-//     profile: userProfileType
-// }
-
-// type mapDispatchPropsType = {
-//     toggleIsFetching: (value: boolean) => void
-//     setUserProfile: (profile: userProfileType) => void
-// }
 
 const mapStateToProps = (state: AppStateType) => ({
     isFetching: state.usersPage.isFetching,
