@@ -1,9 +1,12 @@
 import React, {ChangeEvent} from 'react'
 
 type ProfileStatusPropsType = {
+    status: string
 }
 
 type ProfileStatusStateType = {
+    status: string
+    editMode: boolean
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusPropsType, ProfileStatusStateType> {

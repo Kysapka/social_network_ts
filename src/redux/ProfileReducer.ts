@@ -1,6 +1,10 @@
+import {Dispatch} from "redux";
+import {profileAPI} from "../bll/API";
+
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS'
 
 
 export type postsDataType = postType[]
@@ -11,6 +15,7 @@ export type postType = {
 }
 
 export type userProfileType = {
+    status: string
     aboutMe: string
     userId: number
     lookingForAJob: boolean
@@ -41,11 +46,12 @@ export type ProfilePageType = {
 export type ProfileReducerActionTypes =
       AddPostActionType
     | UpdateNewTextActionType
-    | setUserProfileAC
+    | setUserProfileActionType
+    | ReturnType<typeof setStatusAC>
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type UpdateNewTextActionType = ReturnType<typeof updateNewPostTextAC>
-export type setUserProfileAC = ReturnType<typeof setUserProfile>
+export type setUserProfileActionType = ReturnType<typeof setUserProfileAC>
 
 const initProfileState: ProfilePageType = {
     posts: [
@@ -54,6 +60,7 @@ const initProfileState: ProfilePageType = {
     ],
     newPostText: "it-kamasutra",
     profile: {
+        status: 'start status from profile reducer',
         aboutMe: '',
         userId: 0,
         lookingForAJob: false,
@@ -91,7 +98,8 @@ export const ProfileReducer = (state: ProfilePageType = initProfileState, action
             return {...state, newPostText : action.newText};
         case "SET_USER_PROFILE":
             return {...state, profile: {...action.profile}}
-
+        case SET_STATUS:
+            return {...state, profile: {...state.profile, status: action.status}}
         default:
             return state;
     }
@@ -99,4 +107,19 @@ export const ProfileReducer = (state: ProfilePageType = initProfileState, action
 }
 export const addPostAC = () => ({type: ADD_POST} as const)
 export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
-export const setUserProfile = (profile: userProfileType) => ({type: SET_USER_PROFILE, profile} as const)
+export const setUserProfileAC = (profile: userProfileType) => ({type: SET_USER_PROFILE, profile} as const)
+const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
+
+export const getStatusTC = (userID: number) => (dispatch: Dispatch<ProfileReducerActionTypes>) => {
+    profileAPI.getStatus(userID)
+        .then((status ) => {
+                status && dispatch(setStatusAC(status))
+        })
+}
+
+export const setStatusTC = (status: string) => (dispatch: Dispatch<ProfileReducerActionTypes>) => {
+    profileAPI.setStatus(status)
+        .then((status ) => {
+
+        })
+}

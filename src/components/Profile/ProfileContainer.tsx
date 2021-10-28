@@ -3,10 +3,10 @@ import {Profile} from "./Profile";
 import {connect, ConnectedProps} from "react-redux";
 import {AppStateType} from "../../redux/rootStore";
 import {toggleIsFetching} from "../../redux/UsersReducer";
-import {setUserProfile, userProfileType} from "../../redux/ProfileReducer";
+import {setUserProfileAC} from "../../redux/ProfileReducer";
 import Loader from "../Loader";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {usersAPI} from "../../bll/API";
+import {profileAPI} from "../../bll/API";
 import {withAuthRedirect} from "../hoc/withRedirect";
 import {compose} from "redux";
 
@@ -18,10 +18,10 @@ export type ProfilePropsType = RouteComponentProps<ownWithRouterPropsType> & Pro
 class ProfileContainer extends React.Component<ProfilePropsType> {
 
     componentDidMount() {
-        let userId = this.props.match.params.userId || 2
+        let userId = this.props.match.params.userId || 18179
         this.props.toggleIsFetching(true)
-        usersAPI.setProfile(userId).then(data => {
-            this.props.setUserProfile(data)
+        profileAPI.setProfile(userId).then(data => {
+            this.props.setUserProfileAC(data)
         })
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
@@ -39,7 +39,7 @@ const mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile
 })
 
-let connectComp = connect(mapStateToProps, {toggleIsFetching,setUserProfile})
+let connectComp = connect(mapStateToProps, {toggleIsFetching,setUserProfileAC})
 export default compose<ComponentType>(
     connectComp,
     // withAuthRedirect,

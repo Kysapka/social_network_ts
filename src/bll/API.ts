@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const instanceUsersApi = axios.create({
+const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0`,
     withCredentials: true,
     headers: {
@@ -9,25 +9,35 @@ const instanceUsersApi = axios.create({
 })
 
 export const authAPI = {
-    authorizationMe: () => instanceUsersApi.get(`auth/me`)
+    authorizationMe: () => instance.get(`auth/me`)
         .then(response => response.data)
         .catch((err) => console.warn('NOT authorization, SERVER NOT RESPONSE...' + err))
     }
 
 export const usersAPI = {
-    getUsers: (currentPage: number =  1, pageSize: number = 10) => instanceUsersApi.get(`users?page=${currentPage}&count=${pageSize}`)
+    getUsers: (currentPage: number =  1, pageSize: number = 10) => instance.get(`users?page=${currentPage}&count=${pageSize}`)
         .then(response => response.data )
         .catch(err => console.warn('USERS NOT RECEIVED, SERVER NOT RESPONSE...' + err)),
-    follow: (userId: number) => instanceUsersApi.post(`follow/${userId}`)
+    follow: (userId: number) => instance.post(`follow/${userId}`)
         .then(response => response.data.resultCode)
         .catch(err => console.warn('USER NOT FOLLOW, SERVER NOT RESPONSE...' + err)),
-    unFollow: (userId: number) => instanceUsersApi.delete(`follow/${userId}`)
+    unFollow: (userId: number) => instance.delete(`follow/${userId}`)
         .then(response => response.data.resultCode)
         .catch(err => console.warn('USER NOT UNFOLLOW, SERVER NOT RESPONSE...' + err)),
-    setProfile: (userId: number | string) => instanceUsersApi.get(`profile/${userId}`)
+}
+
+export const profileAPI = {
+    setProfile: (userId: number | string) => instance.get(`profile/${userId}`)
         .then(response => response.data)
         .catch(err => console.warn('PROFILE NOT SET, SERVER NOT RESPONSE...' + err)),
+    getStatus: (userId: number) => instance.get<number, string>(`profile/status/${userId}`)
+        .then(status => status)
+        .catch(err => console.warn('Cannot load status... ' + err)),
+    setStatus: (status: string) => instance.put(`profile/status`, {status})
+        .then(res => console.log(res))
 }
+
+
 
 
 
