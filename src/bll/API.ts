@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0`,
@@ -30,13 +30,16 @@ export const profileAPI = {
     setProfile: (userId: number | string) => instance.get(`profile/${userId}`)
         .then(response => response.data)
         .catch(err => console.warn('PROFILE NOT SET, SERVER NOT RESPONSE...' + err)),
-    getStatus: (userId: number) => instance.get<number, string>(`profile/status/${userId}`)
-        .then(status => status)
+    getStatus: (userId: number) => instance.get<number, any>(`profile/status/${userId}`)
+        .then(res => res)
         .catch(err => console.warn('Cannot load status... ' + err)),
-    setStatus: (status: string) => instance.put(`profile/status`, {status})
-        .then(res => console.log(res))
+    updateStatus: (status: string) => instance.put<any, ResponseType>(`profile/status`, {status})
+        .then(res => res)
 }
 
+type ResponseType = {
+    data: any
+}
 
 
 

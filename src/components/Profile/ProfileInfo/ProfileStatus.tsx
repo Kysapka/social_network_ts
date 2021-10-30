@@ -1,7 +1,9 @@
 import React, {ChangeEvent} from 'react'
 
+
 type ProfileStatusPropsType = {
     status: string
+    updateStatusTC: any
 }
 
 type ProfileStatusStateType = {
@@ -17,7 +19,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, Profi
     }
 
     state = {
-        status: 'test status',
+        status: this.props.status,
         editMode: false
     }
 
@@ -25,16 +27,27 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, Profi
        this.setState({status: event.currentTarget.value})
     }
 
+    deactivateEditMode() {
+        this.setState({editMode: false})
+        this.props.updateStatusTC(this.state.status)
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<ProfileStatusStateType>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+    }
+
     render() {
         return (
             <div>
                 { this.state.editMode
                     ? <input onChange={this.onChangeStatusTitleHandler}
-                            onBlur={()=>this.setState({editMode: false})}
+                            onBlur={() => this.deactivateEditMode()}
                              value={this.state.status}
                              placeholder={this.state.status} autoFocus
                     />
-                    : <span onDoubleClick={()=>this.setState({editMode: true})}>{this.state.status}</span>
+                    : <span onDoubleClick={()=>this.setState({editMode: true})}>{this.props.status}</span>
                 }
             </div>
         )
