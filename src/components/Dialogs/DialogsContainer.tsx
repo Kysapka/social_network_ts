@@ -15,7 +15,7 @@ let mapStateToProps = (state: AppStateType) => {
 
 export type DialogsPropsType = ConnectedProps<typeof connectedComp>
 
-const connectedComp = connect(mapStateToProps, {updateNewMessageBodyAC, sendNewMessageAC})
+const connectedComp = connect(mapStateToProps, {sendNewMessageAC})
 
 export const DialogsContainer = compose<React.ComponentType>(
     connectedComp,

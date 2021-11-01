@@ -1,10 +1,10 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 import {Button, Grid, makeStyles, Paper, TextField} from '@material-ui/core';
 import {DialogsPropsType} from './DialogsContainer'
-import {updateNewMessageBodyAC} from "../../redux/DialogsReducer";
-import {useFormik} from "formik";
+import {Form, useFormik} from "formik";
+import Stack from "@mui/material/Stack";
 
 const useGridStyles = makeStyles((theme) => ({
     root: {
@@ -45,7 +45,6 @@ export const Dialogs = React.memo((props: DialogsPropsType) => {
                 <Grid item xs={12}>
                     <FormMessage messageBody={props.dialogsPage.newMessageBody}
                                  sendMessage={props.sendNewMessageAC}
-                                 updateMessage={props.updateNewMessageBodyAC}
                     />
                 </Grid>
             </Grid>
@@ -55,11 +54,8 @@ export const Dialogs = React.memo((props: DialogsPropsType) => {
 
 type FormMessagePropsType = {
     messageBody: string
-    sendMessage: () => void
-    updateMessage: (value: string) => void
+    sendMessage: (value: string) => void
 }
-
-
 
 export const FormMessage = (props: FormMessagePropsType) => {
 
@@ -67,17 +63,30 @@ export const FormMessage = (props: FormMessagePropsType) => {
         messageBody: string
     }
 
-    const formik = useFormik({
+    type messageErrorsFormType = {
+        messageBody?: string
+    }
+
+    const formik = useFormik<initialValuesType>({
         initialValues: {
-            messageBody: 'xxx'
+            messageBody: ''
         },
-        onSubmit: (values) => {console.log(JSON.stringify(values))}
+        onSubmit: (values) => {
+            props.sendMessage(values.messageBody)
+        },
+        validate: (values) => {
+            const errors: messageErrorsFormType = {};
+            if (values.messageBody.length > 15) {
+                errors.messageBody = "max length 30"
+            }
+            return errors
+        }
     })
 
+
     return <>
-
-        <form onSubmit={formik.handleSubmit}>
-
+        <Stack direction="row" spacing={2}>
+        <form onSubmit={formik.handleSubmit} style={{display: 'flex', alignItems: 'center'}}>
             <TextField
                 id={"messageBody"}
                 name={"messageBody"}
@@ -85,28 +94,18 @@ export const FormMessage = (props: FormMessagePropsType) => {
                 variant="outlined"
                 margin={"normal"}
                 value={formik.values.messageBody}
-                // onChange={(event) => props.updateMessage(event.currentTarget.value)}
+                onChange={formik.handleChange}
+                error={!!formik.errors.messageBody}
+                helperText={formik.errors.messageBody}
             />
 
             <Button size="large" variant="contained" color="primary"
                     type={"submit"}
-                    // onClick={props.sendMessage}
-                    // style={{marginLeft: 10}}
-
+                    style={{marginLeft: 10, verticalAlign: "center"}}
             >
                 Send message
             </Button>
-
         </form>
-
-
-
-        {/*<TextField size="small" label="Enter your message" variant="outlined"*/}
-        {/*           value={props.messageBody}*/}
-        {/*           onChange={(event) => props.updateMessage(event.currentTarget.value)}*/}
-        {/*/>*/}
-        {/*<Button size="large" variant="contained" color="primary"*/}
-        {/*        onClick={props.sendMessage}*/}
-        {/*        style={{marginLeft: 10}}>Send message</Button>*/}
+        </Stack>
     </>
 }
