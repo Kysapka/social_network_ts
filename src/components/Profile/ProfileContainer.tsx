@@ -20,9 +20,6 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         let userId = this.props.match.params.userId || 18179
         this.props.toggleIsFetching(true)
         getProfileTC(+userId)
-        // profileAPI.setProfile(userId).then(data => {
-        //     this.props.setUserProfileAC(data)
-        // })
         this.props.getStatusTC(+userId)
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }

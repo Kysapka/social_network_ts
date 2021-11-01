@@ -1,29 +1,63 @@
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import TextField from '@mui/material/TextField';
+import {Box, Button} from "@material-ui/core";
+import {Checkbox, FormControlLabel} from "@mui/material";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
-type Inputs = {
-    example: string,
-    exampleRequired: string,
-};
+interface IFormInput {
+    email: string;
+    password: string;
+    rememberMe: boolean;
+}
+
+let schema = yup.object({
+    email: yup.string().email('Enter a valid email').required('email is required'),
+    password: yup.string().required('password is required'),
+    rememberMe:yup.boolean().required('checkbox required'),
+}).required();
 
 export const LoginForm = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+    const {control, handleSubmit, formState: {errors, touchedFields}} = useForm<IFormInput>({
+        mode: 'all',
+        resolver: yupResolver(schema),
+    });
 
-    console.log(watch("example")) // watch input value by passing the name of it
+    const onSubmit: SubmitHandler<IFormInput> = data => {
+        console.log(data)
+        console.log(touchedFields)
+    };
 
     return (
-        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <form onSubmit={handleSubmit(onSubmit)}>
-            {/* register your input into the hook by invoking the "register" function */}
-            <input defaultValue="test" {...register("example")} />
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} style={{margin: 20, textAlign: "center"}}>
+            <Controller name={"email"} control={control}
+                render={({field}) =>
+                    <TextField {...field}
+                               id={"email"} name={"email"} label="Enter your email"
+                               error={Boolean(errors.email)}
+                               helperText={errors.email?.message}
+                               size="small" fullWidth margin="dense"
+                              />}
+            />
 
-            {/* include validation with required or other standard HTML validation rules */}
-            <input {...register("exampleRequired", { required: true })} />
-            {/* errors will return when field validation fails  */}
-            {errors.exampleRequired && <span>This field is required</span>}
+            <Controller name={"password"} control={control}
+                render={({field}) =>
+                    <TextField {...field}
+                               id={"password"} name={"password"} label="Enter your password"
+                               error={Boolean(errors.password)}
+                               helperText={errors.password?.message}
+                               type="password"  size="small" fullWidth margin="dense"
+                               />}
+            />
 
-            <input type="submit" />
-        </form>
+            <Controller name="rememberMe" control={control} defaultValue={false}
+                render={({field}) =>
+                    <FormControlLabel label="remember me" control={<Checkbox  {...field}/>} />}
+            />
+            <div>
+                <Button type="submit" variant={"contained"} color={"primary"}>Enter</Button>
+            </div>
+        </Box>
     );
-}
+};
