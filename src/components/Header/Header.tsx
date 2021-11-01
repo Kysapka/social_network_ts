@@ -9,6 +9,17 @@ type HeaderPropsType = HeaderOwnPropsType
 export const Header = (props: HeaderPropsType) => {
 
     const GridClasses = useGridStyles();
+
+    const logOutHandler = () => {
+        console.log('Exit')
+        props.logOutTC()
+    }
+
+    const onLoginHandler = () => {
+       console.log('redirect')
+       props.history.push('/login')
+    }
+
     return (
         <AppBar position="static">
             <Toolbar>
@@ -22,9 +33,10 @@ export const Header = (props: HeaderPropsType) => {
 
                 {props.isAuth ?
                     <Typography>
-                       Welcome, {props.login}
+                        Welcome, {props.login}
+                            <Button style={{marginLeft: "20px"}} onClick={logOutHandler} color="inherit" size={"small"} variant={"contained"}>Logout</Button>
                     </Typography>
-                    : <Button color="inherit">Login</Button>
+                    : <Button onClick={onLoginHandler} variant="contained">Login</Button>
                 }
 
             </Toolbar>

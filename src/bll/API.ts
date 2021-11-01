@@ -11,8 +11,10 @@ const instance = axios.create({
 export const authAPI = {
     authorizationMe: () => instance.get(`auth/me`)
         .then(response => response.data)
-        .catch((err) => console.warn('NOT authorization, SERVER NOT RESPONSE...' + err))
-    }
+        .catch((err) => console.warn('NOT authorization, SERVER NOT RESPONSE...' + err)),
+    login: (loginData: LoginDataType) => instance.post<LoginDataType, LoginResponseDataType>('/auth/login', loginData),
+    logOut: () => instance.delete('/auth/login')
+}
 
 export const usersAPI = {
     getUsers: (currentPage: number =  1, pageSize: number = 10) => instance.get(`users?page=${currentPage}&count=${pageSize}`)
@@ -27,6 +29,7 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
+
     setProfile: (userId: number | string) => instance.get(`profile/${userId}`)
         .then(response => response.data)
         .catch(err => console.warn('PROFILE NOT SET, SERVER NOT RESPONSE...' + err)),
@@ -37,8 +40,25 @@ export const profileAPI = {
         .then(res => res)
 }
 
+export type LoginResponseDataType = {
+    data: {
+        resultCode: number
+        messages: Array<string>,
+        data: {
+            userId: number
+        }
+    }
+}
+
 type ResponseType = {
     data: any
+}
+
+export type LoginDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: boolean
 }
 
 

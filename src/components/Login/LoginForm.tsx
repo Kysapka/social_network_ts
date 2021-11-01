@@ -5,11 +5,18 @@ import {Box, Button} from "@material-ui/core";
 import {Checkbox, FormControlLabel} from "@mui/material";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import {LoginDataType} from "../../bll/API";
+import {Redirect} from "react-router-dom";
 
 interface IFormInput {
     email: string;
     password: string;
     rememberMe: boolean;
+}
+
+type LoginFormPropsType = {
+    isAuth: boolean
+    loginTC: (loginData: LoginDataType) => void
 }
 
 let schema = yup.object({
@@ -18,16 +25,20 @@ let schema = yup.object({
     rememberMe:yup.boolean().required('checkbox required'),
 }).required();
 
-export const LoginForm = () => {
-    const {control, handleSubmit, formState: {errors, touchedFields}} = useForm<IFormInput>({
+export const LoginForm = (props: LoginFormPropsType) => {
+    const {control, handleSubmit, formState: {errors}} = useForm<IFormInput>({
         mode: 'all',
         resolver: yupResolver(schema),
     });
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
-        console.log(data)
-        console.log(touchedFields)
+        props.loginTC({...data, captcha: false})
+
     };
+
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
 
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} style={{margin: 20, textAlign: "center"}}>
@@ -37,7 +48,7 @@ export const LoginForm = () => {
                                id={"email"} name={"email"} label="Enter your email"
                                error={Boolean(errors.email)}
                                helperText={errors.email?.message}
-                               size="small" fullWidth margin="dense"
+                               size="small" fullWidth margin="normal"
                               />}
             />
 
@@ -56,7 +67,7 @@ export const LoginForm = () => {
                     <FormControlLabel label="remember me" control={<Checkbox  {...field}/>} />}
             />
             <div>
-                <Button type="submit" variant={"contained"} color={"primary"}>Enter</Button>
+                <Button type="submit" variant={"contained"} color={"primary"} size="large">Enter</Button>
             </div>
         </Box>
     );

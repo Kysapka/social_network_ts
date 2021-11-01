@@ -12,6 +12,7 @@ import {compose} from "redux";
 type ownWithRouterPropsType = {
     userId: string
 }
+
 export type ProfilePropsType = RouteComponentProps<ownWithRouterPropsType> & ProfileStatePropsType
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
@@ -19,8 +20,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId || 18179
         this.props.toggleIsFetching(true)
-        getProfileTC(+userId)
-        this.props.getStatusTC(+userId)
+        console.log(userId)
+        this.props.getProfileTC(Number(userId))
+        this.props.getStatusTC(Number(userId))
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
 
@@ -41,6 +43,6 @@ const mapStateToProps = (state: AppStateType) => ({
 let connectComp = connect(mapStateToProps, {toggleIsFetching,setUserProfileAC, getProfileTC, getStatusTC, updateStatusTC})
 export default compose<ComponentType>(
     connectComp,
-    // withAuthRedirect,
+    withAuthRedirect,
     withRouter,
 )(ProfileContainer)

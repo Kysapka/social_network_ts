@@ -3,6 +3,8 @@ import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 import {Button, Grid, makeStyles, Paper, TextField} from '@material-ui/core';
 import {DialogsPropsType} from './DialogsContainer'
+import {updateNewMessageBodyAC} from "../../redux/DialogsReducer";
+import {useFormik} from "formik";
 
 const useGridStyles = makeStyles((theme) => ({
     root: {
@@ -25,14 +27,6 @@ export const Dialogs = React.memo((props: DialogsPropsType) => {
     let messagesElements = props.dialogsPage.messages
         .map(m => <Message id={m.id} message={m.message}/>)
 
-    let onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChangeHandler(e.currentTarget.value)
-    }
-
-    // if (!props.isAuth) {
-    //     return <Redirect to={"/login"}/>
-    // }
-
     return (
         <div className={useGridClasses.root}>
 
@@ -49,16 +43,70 @@ export const Dialogs = React.memo((props: DialogsPropsType) => {
                 </Grid>
 
                 <Grid item xs={12}>
-
-                    <TextField size="small" label="Enter your message" variant="outlined"
-                               value={props.dialogsPage.newMessageBody} onChange={onChangeHandler}/>
-                    <Button size="large" variant="contained" color="primary" onClick={props.sendNewMessage}
-                            style={{marginLeft: 10}}>Send message</Button>
-
+                    <FormMessage messageBody={props.dialogsPage.newMessageBody}
+                                 sendMessage={props.sendNewMessageAC}
+                                 updateMessage={props.updateNewMessageBodyAC}
+                    />
                 </Grid>
             </Grid>
-
         </div>
-
     )
 })
+
+type FormMessagePropsType = {
+    messageBody: string
+    sendMessage: () => void
+    updateMessage: (value: string) => void
+}
+
+
+
+export const FormMessage = (props: FormMessagePropsType) => {
+
+    type initialValuesType = {
+        messageBody: string
+    }
+
+    const formik = useFormik({
+        initialValues: {
+            messageBody: 'xxx'
+        },
+        onSubmit: (values) => {console.log(JSON.stringify(values))}
+    })
+
+    return <>
+
+        <form onSubmit={formik.handleSubmit}>
+
+            <TextField
+                id={"messageBody"}
+                name={"messageBody"}
+                label={"enter your message"}
+                variant="outlined"
+                margin={"normal"}
+                value={formik.values.messageBody}
+                // onChange={(event) => props.updateMessage(event.currentTarget.value)}
+            />
+
+            <Button size="large" variant="contained" color="primary"
+                    type={"submit"}
+                    // onClick={props.sendMessage}
+                    // style={{marginLeft: 10}}
+
+            >
+                Send message
+            </Button>
+
+        </form>
+
+
+
+        {/*<TextField size="small" label="Enter your message" variant="outlined"*/}
+        {/*           value={props.messageBody}*/}
+        {/*           onChange={(event) => props.updateMessage(event.currentTarget.value)}*/}
+        {/*/>*/}
+        {/*<Button size="large" variant="contained" color="primary"*/}
+        {/*        onClick={props.sendMessage}*/}
+        {/*        style={{marginLeft: 10}}>Send message</Button>*/}
+    </>
+}

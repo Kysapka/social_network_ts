@@ -115,7 +115,7 @@ const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
 
 export const getProfileTC = (userId: number) => (dispatch: Dispatch<ProfileReducerActionTypes>) => {
     profileAPI.setProfile(userId).then(data => {
-        setUserProfileAC(data)
+        dispatch(setUserProfileAC(data))
     })
 }
 
