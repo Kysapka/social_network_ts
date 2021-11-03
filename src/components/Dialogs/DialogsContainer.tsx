@@ -1,6 +1,6 @@
 import {AppStateType} from '../../redux/rootStore'
 import {Dialogs} from './Dialogs'
-import {sendNewMessageAC, updateNewMessageBodyAC} from '../../redux/DialogsReducer'
+import {sendNewMessageAC} from '../../redux/DialogsReducer'
 import {compose} from 'redux'
 
 import {withAuthRedirect} from "../hoc/withRedirect";
