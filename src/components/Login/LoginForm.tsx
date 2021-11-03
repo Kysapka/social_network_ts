@@ -36,6 +36,7 @@ export const LoginForm = (props: LoginFormPropsType) => {
 
     };
 
+    
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
