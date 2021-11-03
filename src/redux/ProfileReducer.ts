@@ -2,7 +2,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../bll/API";
 
 const ADD_POST = 'ADD_POST';
-// const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS'
 
@@ -45,12 +44,10 @@ export type ProfilePageType = {
 
 export type ProfileReducerActionTypes =
       AddPostActionType
-    // | UpdateNewTextActionType
     | setUserProfileActionType
     | ReturnType<typeof setStatusAC>
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
-// export type UpdateNewTextActionType = ReturnType<typeof updateNewPostTextAC>
 export type setUserProfileActionType = ReturnType<typeof setUserProfileAC>
 
 const initProfileState: ProfilePageType = {
@@ -94,8 +91,6 @@ export const ProfileReducer = (state: ProfilePageType = initProfileState, action
                 likesCount: 0
             }
             return {...state, posts: [...state.posts, newPost]};
-        // case UPDATE_NEW_POST_TEXT:
-        //     return {...state, newPostText : action.newText};
         case SET_USER_PROFILE:
             return {...state, profile: {...action.profile}}
         case SET_STATUS:
@@ -105,13 +100,10 @@ export const ProfileReducer = (state: ProfilePageType = initProfileState, action
     }
 
 }
+
 export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
-// export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
 export const setUserProfileAC = (profile: userProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
-
-
-
 
 export const getProfileTC = (userId: number) => (dispatch: Dispatch<ProfileReducerActionTypes>) => {
     profileAPI.setProfile(userId).then(data => {

@@ -4,7 +4,6 @@ import {AppStateType} from '../../../redux/rootStore';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 
-
 type mapStateToPropsType = {
     posts: Array<postType>
     newPostText: string

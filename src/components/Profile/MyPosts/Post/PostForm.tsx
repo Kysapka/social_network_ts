@@ -22,9 +22,7 @@ export const PostForm = (props: PostFromPropsType) => {
             newPostText: ''
         },
         onSubmit: (values) => {
-            console.log(values)
             props.addPost(values.newPostText)
-            // props.sendMessage(values.messageBody)
         },
         validate: (values) => {
             const errors: postErrorsFormType = {};
