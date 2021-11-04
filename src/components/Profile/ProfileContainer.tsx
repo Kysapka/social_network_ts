@@ -18,11 +18,17 @@ export type ProfilePropsType = RouteComponentProps<ownWithRouterPropsType> & Pro
 class ProfileContainer extends React.Component<ProfilePropsType> {
 
     componentDidMount() {
-        let userId = this.props.match.params.userId || 18179
+        let userId = 0;
+        if (this.props.match.params.userId) {
+            userId = Number(this.props.match.params.userId)
+        } else {
+            if (this.props.authId) {
+                userId = this.props.authId
+            }
+        }
         this.props.toggleIsFetching(true)
-        console.log(userId)
-        this.props.getProfileTC(Number(userId))
-        this.props.getStatusTC(Number(userId))
+        this.props.getProfileTC(userId)
+        this.props.getStatusTC(userId)
         setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
 
@@ -35,6 +41,7 @@ type ProfileStatePropsType = ConnectedProps<typeof connectComp>
 
 
 const mapStateToProps = (state: AppStateType) => ({
+    authId: state.auth.id,
     isFetching: state.usersPage.isFetching,
     profile: state.profilePage.profile,
     status: state.profilePage.status

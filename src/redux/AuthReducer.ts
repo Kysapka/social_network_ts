@@ -48,11 +48,13 @@ export const loginTC = (loginData: LoginDataType): ThunkAction<void, AppStateTyp
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setAuth())
+                return ""
             } else {
                 if (res.data.messages[0].length > 0) {
                     return res.data.messages[0]
-                } else return ""
+                }
             }
+        return "";
         })
 }
 

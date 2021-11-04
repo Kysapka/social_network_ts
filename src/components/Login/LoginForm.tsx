@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {LoginDataType} from "../../bll/API";
 import {Redirect} from "react-router-dom";
+import { ErrorMessage } from '@hookform/error-message';
 
 interface IFormInput {
     commonFormErrors: {}
@@ -40,14 +41,14 @@ export const LoginForm = (props: LoginFormPropsType) => {
     const onSubmit: SubmitHandler<IFormInput> = async data => {
 
        let serverErrorMessage = await props.loginTC({...data, captcha: false})
-
+        console.dir(serverErrorMessage)
         setError("commonFormErrors", {
             type: "ServerError",
             // @ts-ignore
             message:  serverErrorMessage
         })
 
-        console.dir(serverErrorMessage)
+
         console.dir(errors.commonFormErrors)
     };
 
@@ -79,6 +80,14 @@ export const LoginForm = (props: LoginFormPropsType) => {
                                type="password"  size="small" fullWidth margin="dense"
                                />}
             />
+
+            <div>
+                <ErrorMessage
+                    errors={errors}
+                    name="commonFormErrors"
+                    render={({ message }) => <p style={{color: "red"}}>{message}</p>}
+                />
+            </div>
 
             <Controller name="rememberMe" control={control}
                 render={({field}) =>
