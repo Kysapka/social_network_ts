@@ -34,7 +34,6 @@ export const AuthReducer = (state: AuthStateType = initAuthState, action: AuthAc
         case SET_AUTH:
             return {...state, ...action.payload,isAuth: true}
         case SET_LOGOUT:
-            debugger
             return {...state, ...initAuthState}
         default:
             return state
@@ -45,10 +44,14 @@ export const setAuthAC = (payload: AuthStateType) => ({type: SET_AUTH, payload} 
 export const setLogOutAC = () => ({type: SET_LOGOUT, initAuthState} as const)
 
 export const loginTC = (loginData: LoginDataType): ThunkAction<void, AppStateType, unknown, AuthActionTypes> => (dispatch: ThunkDispatch<AppStateType, undefined, AuthActionTypes>) => {
-    authAPI.login(loginData)
+   return  authAPI.login(loginData)
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setAuth())
+            } else {
+                if (res.data.messages[0].length > 0) {
+                    return res.data.messages[0]
+                } else return ""
             }
         })
 }
@@ -56,7 +59,6 @@ export const loginTC = (loginData: LoginDataType): ThunkAction<void, AppStateTyp
 export const logOutTC = () => (dispatch: Dispatch) => {
     authAPI.logOut().then(res => {
         if (res.data.resultCode === 0) {
-            console.log('ready dispatch', res.data.resultCode)
             dispatch(setLogOutAC())
         }
     })

@@ -9,6 +9,7 @@ import {LoginDataType} from "../../bll/API";
 import {Redirect} from "react-router-dom";
 
 interface IFormInput {
+    commonFormErrors: {}
     email: string;
     password: string;
     rememberMe: boolean;
@@ -26,17 +27,31 @@ let schema = yup.object({
 }).required();
 
 export const LoginForm = (props: LoginFormPropsType) => {
-    const {control, handleSubmit, formState: {errors}} = useForm<IFormInput>({
+    const {control, handleSubmit, setError, formState: {errors}} = useForm<IFormInput>({
+        defaultValues: {
+            email: '',
+            password: '',
+            rememberMe: false
+        },
         mode: 'all',
         resolver: yupResolver(schema),
     });
 
-    const onSubmit: SubmitHandler<IFormInput> = data => {
-        props.loginTC({...data, captcha: false})
+    const onSubmit: SubmitHandler<IFormInput> = async data => {
 
+       let serverErrorMessage = await props.loginTC({...data, captcha: false})
+
+        setError("commonFormErrors", {
+            type: "ServerError",
+            // @ts-ignore
+            message:  serverErrorMessage
+        })
+
+        console.dir(serverErrorMessage)
+        console.dir(errors.commonFormErrors)
     };
 
-    
+
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
@@ -50,7 +65,9 @@ export const LoginForm = (props: LoginFormPropsType) => {
                                error={Boolean(errors.email)}
                                helperText={errors.email?.message}
                                size="small" fullWidth margin="normal"
-                              />}
+                              />
+                }
+
             />
 
             <Controller name={"password"} control={control}
@@ -63,7 +80,7 @@ export const LoginForm = (props: LoginFormPropsType) => {
                                />}
             />
 
-            <Controller name="rememberMe" control={control} defaultValue={false}
+            <Controller name="rememberMe" control={control}
                 render={({field}) =>
                     <FormControlLabel label="remember me" control={<Checkbox  {...field}/>} />}
             />

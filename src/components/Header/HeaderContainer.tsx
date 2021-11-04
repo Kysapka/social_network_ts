@@ -20,6 +20,7 @@ export type HeaderOwnPropsType = connectedCompPropsType & RouteComponentProps<an
 
 type mapStateToPropsType = AuthStateType
 
+
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({...state.auth})
 
 type connectedCompPropsType = ConnectedProps<typeof connectedComp>
