@@ -18,7 +18,7 @@ interface IFormInput {
 
 type LoginFormPropsType = {
     isAuth: boolean
-    loginTC: (loginData: LoginDataType) => void
+    loginTC: (loginData: LoginDataType) => Promise<string>
 }
 
 let schema = yup.object({
@@ -40,11 +40,11 @@ export const LoginForm = (props: LoginFormPropsType) => {
 
     const onSubmit: SubmitHandler<IFormInput> = async data => {
 
-       let serverErrorMessage = await props.loginTC({...data, captcha: false})
-        console.dir(serverErrorMessage)
+       let serverErrorMessage = (await props.loginTC({...data, captcha: false}))
+        console.log(serverErrorMessage)
         setError("commonFormErrors", {
             type: "ServerError",
-            // @ts-ignore
+
             message:  serverErrorMessage
         })
 

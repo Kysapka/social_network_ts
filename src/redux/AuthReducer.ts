@@ -43,7 +43,8 @@ export const AuthReducer = (state: AuthStateType = initAuthState, action: AuthAc
 export const setAuthAC = (payload: AuthStateType) => ({type: SET_AUTH, payload} as const)
 export const setLogOutAC = () => ({type: SET_LOGOUT, initAuthState} as const)
 
-export const loginTC = (loginData: LoginDataType): ThunkAction<void, AppStateType, unknown, AuthActionTypes> => (dispatch: ThunkDispatch<AppStateType, undefined, AuthActionTypes>) => {
+export const loginTC = (loginData: LoginDataType): ThunkAction<Promise<string>, AppStateType, unknown, AuthActionTypes> =>
+    (dispatch) => {
    return  authAPI.login(loginData)
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -56,6 +57,9 @@ export const loginTC = (loginData: LoginDataType): ThunkAction<void, AppStateTyp
             }
         return "";
         })
+       .catch(e => {
+           return e.message
+       })
 }
 
 export const logOutTC = () => (dispatch: Dispatch) => {
