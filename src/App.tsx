@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Navbar} from './components/Navbar/Navbar'
-import {Route} from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import {Container, Grid, makeStyles, Paper} from '@material-ui/core';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import Loader from "./components/Loader";
+import {connect, ConnectedProps} from "react-redux";
+import {AppStateType} from "./redux/rootStore";
+import {setAuth} from "./redux/AuthReducer";
+import {setAppInitializedAC} from "./redux/AppReducer";
+import {toggleIsFetching} from "./redux/UsersReducer";
 
 export const useGridStyles = makeStyles((theme) => ({
     root: {
@@ -31,10 +37,23 @@ const usePaperStyles = makeStyles((theme) => ({
     },
 }));
 
-export const App = () => {
+const ConnectedApp = (props: TConnectedPropsType) => {
 
     const PaperClasses = usePaperStyles();
     const GridClasses = useGridStyles();
+
+
+    useEffect(() =>{
+        // props.toggleIsFetching(true)
+
+        props.setAuth()
+        // setTimeout(() => {props.setAppInitializedAC(true)}, 5000)
+        // setTimeout(() => {props.toggleIsFetching(false)}, 500)
+    }, [])
+
+    if(!props.isInitialized) {
+        return <Loader />
+    }
 
     return (
            <Container fixed>
@@ -48,10 +67,11 @@ export const App = () => {
                        </Grid>
                        <Grid item xs={9}>
                            <Paper className={PaperClasses.paper} style={{height: "100%"}}>
-                               <Route path="/login" render={() => <Login />}/>
-                               <Route path="/profile/:userId?" render={() => <ProfileContainer />}/>
-                               <Route path="/users" render={() => <UsersContainer />}/>
-                               <Route path="/dialogs" render={() => <DialogsContainer />}/>
+                               <Route exact path="/login" render={() => <Login />}/>
+                               <Route exact path="/profile/:userId?" render={() => <ProfileContainer />}/>
+                               <Route exact path="/users" render={() => <UsersContainer />}/>
+                               <Route exact path="/dialogs" render={() => <DialogsContainer />}/>
+                               {/*<Route  path="/" render={() => <Redirect to={"/profile"} />}/>*/}
                            </Paper>
                        </Grid>
                    </Grid>
@@ -59,3 +79,15 @@ export const App = () => {
            </Container>
     )
 }
+
+
+
+const mapStateToProps = (state: AppStateType) => ({
+    isInitialized: state.app.isAppInitialized
+})
+
+const connectedComp = connect(mapStateToProps, {setAuth,toggleIsFetching,setAppInitializedAC})
+
+export const App = connectedComp(ConnectedApp)
+
+type TConnectedPropsType = ConnectedProps<typeof connectedComp>

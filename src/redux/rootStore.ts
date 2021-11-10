@@ -4,6 +4,7 @@ import { ProfileReducer } from './ProfileReducer'
 import { UsersReducer } from './UsersReducer'
 import {AuthReducer} from "./AuthReducer";
 import thunk from "redux-thunk";
+import {AppReducer} from "./AppReducer";
 
 
 
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogsReducer,
     usersPage : UsersReducer,
-    auth: AuthReducer
+    auth: AuthReducer,
+    app: AppReducer
 })
 
 

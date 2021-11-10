@@ -2,6 +2,7 @@ import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./rootStore";
 import {authAPI, LoginDataType} from "../bll/API";
 import {Dispatch} from "redux";
+import {AppInitActionsType, setAppInitializedAC} from "./AppReducer";
 
 const SET_AUTH = 'SET_AUTH'
 const SET_LOGOUT = 'SET_LOGOUT'
@@ -16,6 +17,7 @@ export type AuthStateType = {
 export type AuthActionTypes =
     setAuthAT
     | setLogOutAT
+|AppInitActionsType
 
 type setAuthAT = ReturnType<typeof setAuthAC>
 type setLogOutAT = ReturnType<typeof setLogOutAC>
@@ -76,6 +78,7 @@ export const setAuth = (): ThunkAction<void, AppStateType, unknown, AuthActionTy
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthAC(data.data))
+                    dispatch(setAppInitializedAC(true))
                 }
             })
             .catch(err => console.log('Autorization failed... ' + err))

@@ -11,12 +11,11 @@ export const Header = (props: HeaderPropsType) => {
     const GridClasses = useGridStyles();
 
     const logOutHandler = () => {
-        console.log('Exit')
         props.logOutTC()
+        props.history.push('/login')
     }
 
     const onLoginHandler = () => {
-       console.log('redirect')
        props.history.push('/login')
     }
 
