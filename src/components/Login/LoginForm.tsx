@@ -16,6 +16,7 @@ interface IFormInput {
     rememberMe: boolean;
 }
 
+
 type LoginFormPropsType = {
     isAuth: boolean
     loginTC: (loginData: LoginDataType) => Promise<string>
