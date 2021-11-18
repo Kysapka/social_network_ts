@@ -5,6 +5,7 @@ import {connect, ConnectedProps} from "react-redux";
 import {AppStateType} from "../../redux/rootStore";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from "redux";
+import {getAuthState, getAuthStateReselect} from "./HeaderSelector";
 
 class HeaderContainer extends React.Component<HeaderOwnPropsType> {
     componentDidMount() {
@@ -21,7 +22,8 @@ export type HeaderOwnPropsType = connectedCompPropsType & RouteComponentProps<an
 type mapStateToPropsType = AuthStateType
 
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({...state.auth})
+// const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({...state.auth})
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({...getAuthStateReselect(state)})
 
 type connectedCompPropsType = ConnectedProps<typeof connectedComp>
 

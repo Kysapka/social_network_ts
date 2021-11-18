@@ -6,6 +6,12 @@ import {Users} from './Users';
 import Loader from '../Loader';
 import {withAuthRedirect} from "../hoc/withRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPageReselect, getFollowingInProgressReselect, getIsFetchingReselect,
+    getpageSizeReselect,
+    getTotalUsersCountReselect,
+    getUsersStateReselect
+} from "./UserSelectors";
 
 type UsersConnectPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -46,12 +52,12 @@ class UsersContainer extends React.Component<UsersConnectPropsType> {
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsersStateReselect(state),
+        pageSize: getpageSizeReselect(state),
+        totalUsersCount: getTotalUsersCountReselect(state),
+        currentPage: getCurrentPageReselect(state),
+        isFetching: getIsFetchingReselect(state),
+        followingInProgress: getFollowingInProgressReselect(state),
     }
 }
 
