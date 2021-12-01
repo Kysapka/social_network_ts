@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 
 
 type ProfileStatusPropsType = {
@@ -13,24 +13,24 @@ type ProfileStatusStateType = {
 
 export const ProfileStatusWithHooks  = (props: ProfileStatusPropsType) =>  {
 
-    // constructor(props: ProfileStatusPropsType) {
-    //     super(props);
-    //     this.onChangeStatusTitleHandler = this.onChangeStatusTitleHandler.bind(this)
-    // }
-    //
-    // state = {
-    //     status: this.props.status,
-    //     editMode: false
-    // }
-    //
-    // onChangeStatusTitleHandler(event: ChangeEvent<HTMLInputElement>)  {
-    //    this.setState({status: event.currentTarget.value})
-    // }
-    //
-    // deactivateEditMode() {
-    //     this.setState({editMode: false})
-    //     this.props.updateStatusTC(this.state.status)
-    // }
+    const [editMode, setEditMode] = useState(false)
+    const [status, setStatus] = useState(props.status)
+
+    const onChangeStatusTitleHandler = (event: ChangeEvent<HTMLInputElement>) =>  {
+        setStatus(event.currentTarget.value)
+    }
+
+    const activateEditMode = () => {
+        setEditMode(true)
+    }
+    const deactivateEditMode = () => {
+        setEditMode(false)
+        props.updateStatusTC(status)
+    }
+useEffect(() => {
+        setStatus(props.status)
+    },
+    [props.status])
     //
     // componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<ProfileStatusStateType>, snapshot?: any) {
     //     if (prevProps.status !== this.props.status) {
@@ -40,15 +40,14 @@ export const ProfileStatusWithHooks  = (props: ProfileStatusPropsType) =>  {
 
         return (
             <div>
-                { state.editMode
+                { editMode
                     ? <input onChange={onChangeStatusTitleHandler}
                             onBlur={() => deactivateEditMode()}
-                             value={state.status}
-                             placeholder={state.status} autoFocus
+                             value={status}
+                             placeholder={status} autoFocus
                     />
-                    : <span onDoubleClick={()=>setState({editMode: true})}>{props.status}</span>
+                    : <span onDoubleClick={activateEditMode}>{status}</span>
                 }
             </div>
         )
-    }
 }
