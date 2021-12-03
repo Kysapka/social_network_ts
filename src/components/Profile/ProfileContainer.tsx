@@ -15,7 +15,7 @@ type ownWithRouterPropsType = {
 
 export type ProfilePropsType = RouteComponentProps<ownWithRouterPropsType> & ProfileStatePropsType
 
-class ProfileContainer extends React.Component<ProfilePropsType> {
+class ProfileContainer extends React.PureComponent<ProfilePropsType> {
 
     componentDidMount() {
         let userId = 0;
@@ -31,7 +31,6 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     }
 
     render() {
-        console.log('Profile container component rendered!')
         return (<>{this.props.isFetching ? <Loader /> : <Profile {...this.props} />}</>)
     }
 }

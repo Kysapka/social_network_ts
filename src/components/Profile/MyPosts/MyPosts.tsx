@@ -4,7 +4,7 @@ import s from './MyPosts.module.css'
 import {myPostsPropsType} from './MyPostsContainer';
 import {PostForm} from "./Post/PostForm";
 
-export const MyPosts: FC<myPostsPropsType> = memo(({posts, addPost}) => {
+export const MyPosts: FC<myPostsPropsType> = memo(({posts, addPostAC}) => {
     console.log('MyPosts component rendered!')
 
     let postsElements =
@@ -14,7 +14,7 @@ export const MyPosts: FC<myPostsPropsType> = memo(({posts, addPost}) => {
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
-                <PostForm addPost={addPost}/>
+                <PostForm addPost={addPostAC}/>
             </div>
             <div className={s.posts}>
                 {postsElements}

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Navbar} from './components/Navbar/Navbar'
-import {Redirect, Route} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import {Container, Grid, makeStyles, Paper} from '@material-ui/core';
 import UsersContainer from './components/Users/UsersContainer';
@@ -44,11 +44,10 @@ const ConnectedApp = (props: TConnectedPropsType) => {
 
 
     useEffect(() =>{
-        // props.toggleIsFetching(true)
-
+        props.toggleIsFetching(true)
         props.setAuth()
-        // setTimeout(() => {props.setAppInitializedAC(true)}, 5000)
-        // setTimeout(() => {props.toggleIsFetching(false)}, 500)
+        setTimeout(() => {props.setAppInitializedAC(true)}, 5000)
+        setTimeout(() => {props.toggleIsFetching(false)}, 500)
     }, [])
 
     if(!props.isInitialized) {
@@ -71,7 +70,6 @@ const ConnectedApp = (props: TConnectedPropsType) => {
                                <Route exact path="/profile/:userId?" render={() => <ProfileContainer />}/>
                                <Route exact path="/users" render={() => <UsersContainer />}/>
                                <Route exact path="/dialogs" render={() => <DialogsContainer />}/>
-                               {/*<Route  path="/" render={() => <Redirect to={"/profile"} />}/>*/}
                            </Paper>
                        </Grid>
                    </Grid>
