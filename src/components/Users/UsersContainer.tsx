@@ -1,13 +1,14 @@
 import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/rootStore';
-import {follow, getUsers,initialUserPageStateType,unFollow} from '../../redux/UsersReducer';
+import {follow, getUsers, initialUserPageStateType, unFollow} from '../../redux/UsersReducer';
 import {Users} from './Users';
 import Loader from '../Loader';
-import {withAuthRedirect} from "../hoc/withRedirect";
 import {compose} from "redux";
 import {
-    getCurrentPageReselect, getFollowingInProgressReselect, getIsFetchingReselect,
+    getCurrentPageReselect,
+    getFollowingInProgressReselect,
+    getIsFetchingReselect,
     getpageSizeReselect,
     getTotalUsersCountReselect,
     getUsersStateReselect

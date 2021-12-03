@@ -27,10 +27,10 @@ export const ProfileStatusWithHooks  = (props: ProfileStatusPropsType) =>  {
         setEditMode(false)
         props.updateStatusTC(status)
     }
-useEffect(() => {
-        setStatus(props.status)
-    },
-    [props.status])
+// useEffect(() => {
+//         setStatus(props.status)
+//     },
+//     [props.status])
     //
     // componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<ProfileStatusStateType>, snapshot?: any) {
     //     if (prevProps.status !== this.props.status) {

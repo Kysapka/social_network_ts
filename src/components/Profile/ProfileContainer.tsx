@@ -26,14 +26,13 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
                 userId = this.props.authId
             }
         }
-        this.props.toggleIsFetching(true)
         this.props.getProfileTC(userId)
         this.props.getStatusTC(userId)
-        setTimeout(() => {this.props.toggleIsFetching(false)}, 500)
     }
 
     render() {
-        return (<>{this.props.isFetching ? <Loader /> : <Profile {...this.props} updateStatusTC={this.props.updateStatusTC} />}</>)
+        console.log('Profile container component rendered!')
+        return (<>{this.props.isFetching ? <Loader /> : <Profile {...this.props} />}</>)
     }
 }
 

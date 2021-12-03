@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../bll/API";
+import {toggleIsFetching, UsersReducerActionsTypes} from "./UsersReducer";
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -43,7 +44,8 @@ export type ProfilePageType = {
 }
 
 export type ProfileReducerActionTypes =
-      AddPostActionType
+    | UsersReducerActionsTypes
+    | AddPostActionType
     | setUserProfileActionType
     | ReturnType<typeof setStatusAC>
 
@@ -53,7 +55,8 @@ export type setUserProfileActionType = ReturnType<typeof setUserProfileAC>
 const initProfileState: ProfilePageType = {
     posts: [
         {id: '1', message: 'Hi, haw are you?', likesCount: 2},
-        {id: '1', message: 'This is my first post', likesCount: 8}
+        {id: '1', message: 'This is my first post', likesCount: 8},
+        {id: '1', message: 'Hello', likesCount: 10}
     ],
     newPostText: "it-kamasutra",
     status: 'start status from profile reducer',
@@ -80,7 +83,6 @@ const initProfileState: ProfilePageType = {
     }
 }
 
-
 export const ProfileReducer = (state: ProfilePageType = initProfileState, action: ProfileReducerActionTypes): ProfilePageType => {
 
     switch (action.type) {
@@ -106,23 +108,29 @@ export const setUserProfileAC = (profile: userProfileType) => ({type: SET_USER_P
 const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
 
 export const getProfileTC = (userId: number) => (dispatch: Dispatch<ProfileReducerActionTypes>) => {
+    dispatch(toggleIsFetching(true))
     profileAPI.setProfile(userId).then(data => {
         dispatch(setUserProfileAC(data))
+        dispatch(toggleIsFetching(false))
     })
 }
 
 export const getStatusTC = (userID: number) => (dispatch: Dispatch<ProfileReducerActionTypes>) => {
+    dispatch(toggleIsFetching(true))
     profileAPI.getStatus(userID)
         .then((res) => {
-            res.data &&  dispatch(setStatusAC(res.data))
+            res.data && dispatch(setStatusAC(res.data))
+            dispatch(toggleIsFetching(false))
         })
 }
 
 export const updateStatusTC = (status: string) => (dispatch: Dispatch<ProfileReducerActionTypes>) => {
+    dispatch(toggleIsFetching(false))
     profileAPI.updateStatus(status)
         .then((res) => {
-            if(res.data.resultCode === 0) {
+            if (res.data.resultCode === 0) {
                 dispatch(setStatusAC(status))
             }
+            dispatch(toggleIsFetching(false))
         })
 }

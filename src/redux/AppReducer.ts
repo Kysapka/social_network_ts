@@ -21,4 +21,4 @@ export const setAppInitializedAC = (isAppInitialized: boolean) => ({type: SET_AP
 
 
 export type AppInitActionsType = ReturnType<typeof setAppInitializedAC>
-type AppActionTypes = AppInitActionsType
+export type AppActionTypes = AppInitActionsType

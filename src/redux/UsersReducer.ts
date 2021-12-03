@@ -40,7 +40,7 @@ export type UserType = {
     followed: boolean
 }
 
-type UsersReducerActionsTypes =
+export type UsersReducerActionsTypes =
     followedAT
     | unFollowedAT
     | setUsersAT
