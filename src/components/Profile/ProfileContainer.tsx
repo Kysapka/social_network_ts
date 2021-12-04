@@ -31,6 +31,7 @@ class ProfileContainer extends React.PureComponent<ProfilePropsType> {
     }
 
     render() {
+        console.log(this.props)
         return (<>{this.props.isFetching ? <Loader /> : <Profile {...this.props} />}</>)
     }
 }
