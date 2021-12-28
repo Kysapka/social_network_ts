@@ -1,91 +1,32 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {Navbar} from './components/Navbar/Navbar'
-import {Route} from 'react-router-dom'
-import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {Container, Grid, makeStyles, Paper} from '@material-ui/core';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
-import Loader from "./components/Loader";
-import {connect, ConnectedProps} from "react-redux";
-import {AppStateType} from "./redux/rootStore";
-import {setAuth} from "./redux/AuthReducer";
-import {setAppInitializedAC} from "./redux/AppReducer";
-import {toggleIsFetching} from "./redux/UsersReducer";
+import {Header} from "./components/Header/Header";
+import {Navbar} from "./components/Navbar/Navbar";
+import {Content} from "./components/Content/Content";
+import {OnlineFriends} from "./components/OnlineFriends/OnlineFriends";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateTypes} from "./redux/store";
+import PreloaderStar from "./icons/Preloaders/PreloaderStar";
+import {getAuthUserData} from "./redux/auth/authReducer";
 
-export const useGridStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-}));
-const usePaperStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'left',
-        color: theme.palette.text.secondary,
-    },
-}));
+function App() {
+    const isInitialized = useSelector<AppStateTypes, boolean>(state => state.auth.isInitialized)
+    const dispatch = useDispatch()
 
-const ConnectedApp = (props: TConnectedPropsType) => {
+    useEffect( () => {
+        dispatch(getAuthUserData())
+    }, [dispatch])
 
-    const PaperClasses = usePaperStyles();
-    const GridClasses = useGridStyles();
-
-
-    useEffect(() =>{
-        props.toggleIsFetching(true)
-        props.setAuth()
-        setTimeout(() => {props.setAppInitializedAC(true)}, 5000)
-        setTimeout(() => {props.toggleIsFetching(false)}, 500)
-    }, [])
-
-    if(!props.isInitialized) {
-        return <Loader />
-    }
+    if (!isInitialized) return <PreloaderStar />
 
     return (
-           <Container fixed>
-               <HeaderContainer />
-               <div className={GridClasses.root}>
-                   <Grid container spacing={0}>
-                       <Grid item xs>
-                           <Paper className={PaperClasses.paper} style={{height: "100%"}}>
-                               <Navbar/>
-                           </Paper>
-                       </Grid>
-                       <Grid item xs={9}>
-                           <Paper className={PaperClasses.paper} style={{height: "100%"}}>
-                               <Route exact path="/login" render={() => <Login />}/>
-                               <Route exact path="/profile/:userId?" render={() => <ProfileContainer />}/>
-                               <Route exact path="/users" render={() => <UsersContainer />}/>
-                               <Route exact path="/dialogs" render={() => <DialogsContainer />}/>
-                           </Paper>
-                       </Grid>
-                   </Grid>
-               </div>
-           </Container>
-    )
+        <div className="App">
+            <Header/>
+            <Navbar/>
+            <Content />
+            <OnlineFriends />
+        </div>
+    );
 }
 
-
-
-const mapStateToProps = (state: AppStateType) => ({
-    isInitialized: state.app.isAppInitialized
-})
-
-const connectedComp = connect(mapStateToProps, {setAuth,toggleIsFetching,setAppInitializedAC})
-
-export const App = connectedComp(ConnectedApp)
-
-type TConnectedPropsType = ConnectedProps<typeof connectedComp>
+export default App;

@@ -1,27 +1,41 @@
-import React from 'react';
+import React from 'react'
+import IconUser from '../../icons/IconUser'
 import s from './Navbar.module.css'
-import {NavLink} from 'react-router-dom'
+import IconMessages from "../../icons/IconMessages";
+import IconNews from "../../icons/IconNews";
+import IconSettings from "../../icons/IconSettings";
+import IconMusic from '../../icons/IconMusic';
+import {NavItem} from "./NavItem/NavItem";
+import {useSelector} from "react-redux";
+import {AppStateTypes} from "../../redux/store";
 
-export const Navbar = () => {
-   return ( <nav className={s.nav}>
-    <div className={s.item}>
-      <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
-    </div>
-    <div className={`${s.item}  ${s.active}`}>
-        <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
-    </div>
-           <div className={`${s.item}  ${s.active}`}>
-        <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
-    </div>
-    <div className={s.item}>
-        <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
-    </div>
-    <div className={s.item}>
-        <NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink>
-    </div>
-    <div className={s.item}>
-        <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
-    </div>
-  </nav>
-   )
+export function Navbar() {
+    const isAuth = useSelector<AppStateTypes, boolean>( state => state.auth.isAuth)
+    const myID = useSelector<AppStateTypes, number>( state => state.auth.id)
+    return (
+        <div className={s.navbar}>
+            <NavItem name={'Profile'} to={isAuth ? `/profile/${myID}` : '/login'}>
+                <IconUser fill={'white'} />
+            </NavItem>
+            <NavItem name={'Messages'} to={'/messages'}>
+                <IconMessages fill={'white'} />
+            </NavItem>
+            <NavItem name={'People'} to={'/users'}>
+                <div className={s.users}>
+                    <IconUser fill={'white'} />
+                    <IconUser fill={'white'} />
+                    <IconUser fill={'white'} />
+                </div>
+            </NavItem>
+            <NavItem name={'Posts'} to={'/posts'}>
+                <IconNews fill={'white'} />
+            </NavItem>
+            <NavItem name={'Music'} to={'/music'}>
+                <IconMusic fill={'white'} />
+            </NavItem>
+            <NavItem name={'Settings'} to={'/settings'}>
+                <IconSettings fill={'white'} />
+            </NavItem>
+        </div>
+    )
 }

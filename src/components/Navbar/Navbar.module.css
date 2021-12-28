@@ -1,15 +1,29 @@
-.nav {
-    /*grid-area: n;*/
-    background-color: burlywood;
-    padding: 20px;
-    /*height: 520px;*/
-    }
+.navbar {
+    height: 100vh;
+    left: 0;
+    padding-bottom: 30px;
+    padding-top: 50px;
+    position: fixed;
+    top: 59px;
+    width: 70px;
+    z-index: 9;
+    background: #1d2333 none repeat scroll 0 0;
+}
 
-.item a {
-    color: white;
-    text-decoration: none;
-}  
+.users {
+    position: relative;
+}
 
-.item a.activeLink {
-    color: gold;
+.users svg:first-child {
+    position: absolute;
+    left: 20px;
+    top: -5px;
+    width: 15px;
+}
+
+.users svg:last-child {
+    position: absolute;
+    right: 20px;
+    top: -5px;
+    width: 15px;
 }

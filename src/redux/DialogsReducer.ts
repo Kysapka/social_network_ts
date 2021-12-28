@@ -1,72 +1,81 @@
-const SEND_NEW_MESSAGE = 'SEND_NEW_MESSAGE';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+import {v1} from "uuid";
 
-export type DialogsReducerActionTypes =
-    SendNewMessageActionType
-    | updateNewMessageBodyType
-
-export type DialogsPageType = {
-    dialogs: dialogsDataType
-    messages: messageDataType
-    newMessageBody: string
-}
-
-export type dialogsDataType = dialogsDataItemType[]
-type dialogsDataItemType = {
-    id: string,
-    name: string
-}
-export type messageDataType = messageType[]
-type messageType = {
+export type dialogTypes = {
     id: string
+    name: string
+    avatar: string
+    isYour: boolean
+    lastMessage: string
+}
+export type messageTypes = {
+    id: string
+    isYou: boolean
+    avatar: string
     message: string
 }
-
-export type DialogsReducersActionsTypes =
-      SendNewMessageActionType
-    | updateNewMessageBodyType
-
-type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
-type updateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
-
-const initDialogsState: DialogsPageType = {
-    messages: [
-        {id: '1', message: 'Hi'},
-        {id: '2', message: 'How is your it-kamasutra?'},
-        {id: '3', message: 'I am fine'},
-        {id: '4', message: 'I am happy'},
-        {id: '5', message: 'Yo'},
-        {id: '6', message: 'Yo Yo Yo'},
-    ],
-    newMessageBody: '',
-    dialogs: [
-        {id: '1', name: 'Dimych'},
-        {id: '2', name: 'Andrew'},
-        {id: '3', name: 'Sveta'},
-        {id: '4', name: 'Sasha'},
-        {id: '5', name: 'Victor'},
-        {id: '6', name: 'Valera'},
-    ]
+export type dialogsPageTypes = {
+    dialogs: Array<dialogTypes>
+    messages: Array<messageTypes>
 }
 
-export const DialogsReducer = (state: DialogsPageType = initDialogsState, action: DialogsReducersActionsTypes): DialogsPageType => {
+const initialState: dialogsPageTypes = {
+    dialogs: [
+        {
+            id: v1(),
+            name: 'Andrew',
+            avatar: 'http://wpkixx.com/html/pitnik-dark/images/resources/friend-avatar3.jpg',
+            isYour: true,
+            lastMessage: 'Oh! Okay, I will chek it. Is its good for you? I will give you feedback!'
+        },
+        {
+            id: v1(),
+            name: 'Lucy',
+            avatar: 'http://wpkixx.com/html/pitnik-dark/images/resources/friend-avatar4.jpg',
+            isYour: false,
+            lastMessage: 'This will be my first time hiking in the mountains!'
+        },
+    ],
+    messages: [
+        {
+            id: v1(),
+            isYou: false,
+            avatar: 'http://wpkixx.com/html/pitnik-dark/images/resources/friend-avatar3.jpg',
+            message: 'Oh! Okay, I will chek it. Is its good for you? I will give you feedback!'
+        },
+        {
+            id: v1(),
+            isYou: true,
+            avatar: 'http://wpkixx.com/html/pitnik-dark/images/resources/friend-avatar8.jpg',
+            message: 'Ha ha! You should be kidding me?!!!'
+        },
+    ],
+}
+
+function dialogsReducer(state: dialogsPageTypes = initialState, action: DialogsActions): dialogsPageTypes {
     switch (action.type) {
-        case SEND_NEW_MESSAGE:
-            let newBodyMessage = action.body
-            let copyState = {...state}
-            copyState.messages.push({id: '6', message: newBodyMessage})
-            state.newMessageBody = ''
-            return copyState;
-        case UPDATE_NEW_MESSAGE_BODY:
-            let updatedState = {...state}
-            updatedState.newMessageBody = action.newMessageBody
-            return updatedState;
+        case 'ADD-MESSAGE':
+            return {
+                ...state,
+                messages: [
+                    ...state.messages,
+                    {
+                        id: v1(),
+                        isYou: true,
+                        avatar: 'http://wpkixx.com/html/pitnik-dark/images/resources/friend-avatar8.jpg',
+                        message: action.message
+                    }
+                ],
+            }
         default:
-            return state;
+            return state
     }
 }
-export const sendNewMessageAC = (body: string) => ({type: SEND_NEW_MESSAGE, body} as const)
-export const updateNewMessageBodyAC = (newMessageBody: string) => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    newMessageBody
-} as const)
+
+export type addMessageActionType = ReturnType<typeof addMessageAC>
+export type DialogsActions = addMessageActionType
+
+export const addMessageAC = (message: string) => {
+    return {type: 'ADD-MESSAGE', message} as const
+}
+
+export default dialogsReducer

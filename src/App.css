@@ -1,48 +1,110 @@
-.app-wrapper {
-  display: grid;
-  width: 1200px;
-  margin: 0 auto;
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
-  grid-template-areas: 
-  "h h"
-  "n c";
+.App {
+  color: white;
+  background: #060818 url("https://static-cse.canva.com/blob/194831/Green-Financial-Services-Corporate-Zoom-Background.png") no-repeat center / cover;
+  min-height: 100vh;
 }
 
-.app-wrapper-content {
-  grid-area: c;
-  background-color: cornflowerblue;
+body {
+  overflow: hidden;
 }
 
-.lds-hourglass {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-
-}
-.lds-hourglass:after {
-  content: " ";
-  display: block;
-  border-radius: 50%;
-  width: 0;
-  height: 0;
-  margin: 8px;
+* {
   box-sizing: border-box;
-  border: 32px solid;
-  border-color: transparent #cef transparent;
-  animation: lds-hourglass 1.2s infinite;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", "Segoe Ui";
 }
-@keyframes lds-hourglass {
-  0% {
-    transform: rotate(0);
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-  50% {
-    transform: rotate(900deg);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
-  100% {
-    transform: rotate(1800deg);
-  }
+
+img {
+  max-width: 100%;
+}
+
+svg path {
+  transition: fill .1s ease-in-out;
+}
+
+h3,
+h4 {
+  border-bottom: 1px solid #272f41;
+  display: block;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  text-transform: capitalize;
+  width: 100%;
+  color: #fff;
+  position: relative;
+}
+
+h3::before ,
+h4::before {
+  content: "";
+  height: 90%;
+  left: -20px;
+  position: absolute;
+  top: -5px;
+  width: 3px;
+  background: #fa6342;
+}
+
+h4 {
+  font-size: 14px;
+  padding: 0 20px 15px;
+}
+
+h4::before {
+  height: 15px;
+  top: 25%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.themeBorder {
+  margin-bottom: 20px;
+  border: 1px solid #272f41;
+  border-radius: 6px;
+  background: #1d2333 none repeat scroll 0 0;
+  min-height: 100px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.themeBorderPad {
+  padding: 20px;
+}
+
+.innerCenter {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 30px;
+  flex-grow: 1;
+}
+
+.innerWrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contentCenter {
+  max-width: 1300px;
+  padding-left: 100px;
+  padding-right: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centralContent {
+  padding-top: 90px;
+}
+
+.wrapperWithWidgets {
+  max-width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 75px;
+  padding-right: 75px;
+  display: flex;
+  align-items: flex-start;
 }
