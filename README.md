@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-You can try this project this [DEMO DEPLYMENT](https://kysapka.github.io/***/)
+You can try this project this [DEMO DEPLYMENT](https://kysapka.github.io/social_network_ts)
 
 Technologies that used here :TypeScript, Redux, Hooks, REST API. Unfinished project, I’m currently working on .
 
