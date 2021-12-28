@@ -16,10 +16,13 @@ interface IFormInput {
 export const Login = () => {
     const dispatch = useDispatch()
 
-    const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>({defaultValues: {
-        userName: process.env.REACT_APP_EMAIL,
-        password: process.env.REACT_PASSWORD,
-        },});
+    const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>({
+        defaultValues: {
+            userName: process.env.REACT_APP_EMAIL,
+            password: process.env.REACT_APP_PASSWORD,
+            rememberMe: false
+        },
+    });
 
     const isResponseError = useSelector<AppStateTypes, null | string>(state => state.auth.isResponseError)
     const auth = useSelector<AppStateTypes, AuthInitialStateTypes>(state => state.auth)
