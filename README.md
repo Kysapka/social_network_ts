@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+You can try this project this [DEMO DEPLYMENT](https://kysapka.github.io/***/)
+
+Technologies that used here :TypeScript, Redux, Hooks, REST API. Unfinished project, I’m currently working on .
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
