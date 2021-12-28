@@ -1,0 +1,46 @@
+.wrapper {
+    width: 100%;
+    padding: 20px;
+}
+
+.main {
+    display: flex;
+}
+
+.avatar {
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.text {
+    background: #282e3e;
+    border: 1px solid #182130;
+    color: #fff;
+    border-radius: 6px 6px 0 0;
+    flex-grow: 1;
+    margin-left: 5px;
+    padding: 10px;
+    height: 65px;
+    resize: none;
+}
+
+.submit {
+    background-color: #616a82;
+    border: medium none;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 11px;
+    padding: 5px;
+    width: calc(100% - 50px);
+    transition: all 0.2s linear 0s;
+    border-radius: 0 0 6px 6px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: #fa6342;
+}

@@ -1,0 +1,11 @@
+.sidebar {
+    height: 100vh;
+    right: 0;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    position: fixed;
+    top: 59px;
+    width: 70px;
+    z-index: 9;
+    background: #1d2333 none repeat scroll 0 0;
+}

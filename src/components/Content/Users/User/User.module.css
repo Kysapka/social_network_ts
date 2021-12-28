@@ -1,0 +1,142 @@
+.wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.notFetching {
+    transition: all .7s ease-in-out;
+    opacity: 1;
+}
+
+.opacityFetching {
+    opacity: 0;
+}
+
+.bgImage {
+    position: absolute;
+    left: 0;
+    top: -100px;
+    width: 100%;
+    z-index: 0;
+    opacity: .1;
+}
+
+.imageWrapper {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    border: 3px solid white;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.userImage {
+    width: 100%;
+}
+
+.content {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.name {
+    font-size: 20px;
+    position: relative;
+    z-index: 1;
+    border-color: #757a95;
+}
+
+.infoBox {
+    width: 30%;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.about {
+    font-size: 15px;
+    line-height: 1.8em;
+    padding: 6px 15px;
+    background-color: #757a95;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    max-width: 80% ;
+}
+
+.pen {
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.about::before {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    background-color: #757a95;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.aboutWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.desc {
+    font-size: 14px;
+    opacity: .55;
+}
+
+.descRes {
+    font-size: 14px;
+    color: white;
+}
+
+.descRes:hover {
+    color: #fa6342;
+}
+
+.descWrapper {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #272f41;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.boxHeading {
+    margin-bottom: 5px;
+}
+
+.input {
+    height: 39px;
+    background-color: #757a95;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    padding: 0 15px;
+    font-size: 15px;
+    position: relative;
+    z-index: 9;
+    outline: none;
+}

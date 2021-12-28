@@ -1,0 +1,32 @@
+.wrapper {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #272f41;
+}
+
+.top {
+    display: flex;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.post {
+    font-size: 13px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.likes {
+    flex-shrink: 0;
+    opacity: .5;
+    font-size: 12px;
+    margin-left: auto;
+    align-self: flex-end;
+}

@@ -1,0 +1,6 @@
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 30px;
+    flex-grow: 1;
+}

@@ -1,0 +1,17 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.wrapper h1 {
+    display: none;
+}
+
+.content {
+    padding: 15px 20px;
+}
+
+.heading {
+    margin-bottom: 10px;
+}

@@ -1,0 +1,8 @@
+.wrapper {
+    padding: 20px;
+}
+
+.center {
+    max-height: 70vh;
+    overflow: auto;
+}

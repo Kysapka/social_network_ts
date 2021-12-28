@@ -1,0 +1,45 @@
+.textarea {
+    max-width: 100%;
+    width: 100%;
+    min-height: 70px;
+    max-height: 220px;
+    display: block;
+    background-color: transparent;
+    color: #a7b2d2;
+    padding: 10px 20px 5px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 20px;
+    resize: vertical;
+    border-radius: 5px;
+    border: 1px solid #616a82;
+    outline: none;
+}
+
+.textarea:focus {
+    border-color: #a7b2d2;
+}
+
+.textarea::placeholder {
+    color: #616a82;
+}
+
+.send {
+    width: 40px;
+    border-radius: 5px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #616a82;
+    cursor: pointer;
+}
+
+.send:hover svg path {
+    fill: white;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}

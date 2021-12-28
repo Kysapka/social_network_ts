@@ -1,0 +1,60 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+    color: white;
+    padding: 10px 5px;
+    height: 70px;
+    overflow: hidden;
+    border-bottom: 1px solid #272f41;
+}
+
+.wrapper:last-child {
+    border: none;
+}
+
+.wrapper:hover {
+    background-color: #545863;
+}
+
+.active {
+    background-color: #616a82;
+}
+
+.avatar {
+    flex-shrink: 0;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.name {
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.text {
+    font-size: 13px;
+    height: 18px;
+    overflow: hidden;
+    max-width: 177px;
+    white-space: nowrap;
+}
+
+.info {
+    position: relative;
+}
+
+.info::after {
+    content: '...';
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+}
+
+.from {
+    font-size: 12px;
+    opacity: .5;
+    margin-right: 5px;
+}

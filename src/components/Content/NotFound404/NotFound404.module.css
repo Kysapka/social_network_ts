@@ -1,0 +1,26 @@
+.wrapper {
+    display: flex;
+    padding: 0 100px 100px;
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.content {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 20px;
+    padding: 10vh;
+}
+
+.title {
+    font-size: 5vh;
+}
+
+.subtitle {
+    font-size: 20vh;
+    font-weight: bold;
+    line-height: 1em;
+    margin-bottom: 5vh;
+}

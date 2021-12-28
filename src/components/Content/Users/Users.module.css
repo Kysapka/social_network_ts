@@ -1,0 +1,75 @@
+.contentCenter {
+    max-width: 1300px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrapper {
+    padding: 20px;
+}
+
+.usersWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    max-height: calc(100vh - 200px);
+    position: relative;
+}
+
+.profile {
+    max-height: calc(100vh - 550px);
+}
+
+div::-webkit-scrollbar {
+    width: 6px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #475072;
+}
+
+div::-webkit-scrollbar-track {
+    border-radius: 2px;
+    background-color: #475072;
+}
+
+div::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.7);
+    border-radius: 2px;
+}
+
+.usersTop {
+    display: flex;
+    justify-content: space-between;
+    /*flex-wrap: wrap;*/
+}
+
+.page {
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: color .1s ease-in-out;
+}
+
+.pagination {
+    flex-shrink: 0;
+}
+
+.currentPage {
+    color: #fa6342;
+    font-weight: 700;
+    cursor: default;
+}
+
+.currentPage:hover,
+.goToEnd:hover,
+.page:hover {
+    color: #fa6342;
+}
+
+.goToEnd {
+    font-size: 20px;
+    cursor: pointer;
+    transition: color .1s ease-in-out;
+}

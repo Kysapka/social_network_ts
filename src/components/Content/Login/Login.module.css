@@ -1,0 +1,70 @@
+.title {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    padding: 30px 70px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, .45);
+    text-transform: uppercase;
+}
+
+.wrapper {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputWrapper {
+    margin-bottom: 15px;
+}
+
+.form input[type=text],
+.form input[type=password] {
+    display: block;
+    height: 35px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, .8);
+    border: none;
+    border-radius: 4px;
+    margin-top: 3px;
+    padding: 0 20px;
+    font-size: 18px;
+    outline: none;
+}
+
+.form input[type=text]:focus,
+.form input[type=password]:focus {
+    background-color: #fff;
+}
+
+.labelText {
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.error {
+    font-size: 12px;
+    color: #fa6342;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.checkboxText {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.submit {
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    background-color: #fa6342;
+    color: white;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+}
