@@ -20,7 +20,7 @@ export const Login = () => {
         defaultValues: {
             userName: process.env.REACT_APP_EMAIL,
             password: process.env.REACT_APP_PASSWORD,
-            rememberMe: true
+            rememberMe: true,
         },
     });
 
