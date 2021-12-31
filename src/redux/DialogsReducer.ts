@@ -51,7 +51,7 @@ const initialState: dialogsPageTypes = {
     ],
 }
 
-function dialogsreducer(state: dialogsPageTypes = initialState, action: DialogsActions): dialogsPageTypes {
+function dialogsReducer(state: dialogsPageTypes = initialState, action: DialogsActions): dialogsPageTypes {
     switch (action.type) {
         case 'ADD-MESSAGE':
             return {
@@ -78,4 +78,4 @@ export const addMessageAC = (message: string) => {
     return {type: 'ADD-MESSAGE', message} as const
 }
 
-export default dialogsreducer
+export default dialogsReducer
