@@ -1,4 +1,4 @@
-import {dialogTypes} from "../../../redux/dialogsreducer";
+import {dialogTypes} from "../../../redux/dialogsReducer";
 import {AppStateTypes} from "../../../redux/store";
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
