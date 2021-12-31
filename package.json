@@ -1,5 +1,9 @@
 {
+  "baseURL": "src",
   "name": "network",
+  "engines": {
+    "node": "14.17.6"
+  },
   "version": "0.1.0",
   "private": true,
   "homepage": "https://kysapka.github.io/social_network_ts",
