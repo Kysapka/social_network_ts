@@ -1,4 +1,4 @@
-import {addMessageAC} from "../../../../../redux/dialogsReducer";
+import {addMessageAC} from "../../../../../redux/dialogsreducer";
 import {AppStateTypes} from "../../../../../redux/store";
 import {SendMessage} from "./SendMessage";
 import {connect} from "react-redux";

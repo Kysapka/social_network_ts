@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import postsReducer from "./postsReducer";
-import dialogsReducer from "./dialogsReducer";
+import dialogsreducer from "./dialogsreducer";
 import rightSidebar from "./rightSidebar";
 import usersReducer, {UsersRootActionsType} from "./usersReducer";
 import profileReducer, {DialogsActionsRootType} from "./profileReducer";
@@ -13,7 +13,7 @@ export type AppStateTypes = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
     postsPage: postsReducer,
-    dialogsPage: dialogsReducer,
+    dialogsPage: dialogsreducer,
     rightSidebar: rightSidebar,
     usersPage: usersReducer,
     profilePage: profileReducer,
