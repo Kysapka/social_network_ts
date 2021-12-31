@@ -1,24 +1,10 @@
-import {dialogTypes} from "../../../redux/dialogsReducer";
+import {dialogTypes} from "../../../redux/DialogsReducer";
 import {AppStateTypes} from "../../../redux/store";
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 import withAuthRedirect from "../../../hoc/withAuthRedirect";
 import React from "react";
-
-// export function Dialogs(props: dialogsType) {
-//     return (
-//         <div className={s.wrapper}>
-//             {props.dialogs.map( d => <OneDialog id={d.id}
-//                                                 avatar={d.avatar}
-//                                                 name={d.name}
-//                                                 isYour={d.isYour}
-//                                                 lastMessage={d.lastMessage}
-//                                                 key={d.id}
-//             /> )}
-//         </div>
-//     )
-// }
 
 type MapStateToPropsType = {
     dialogs: dialogTypes[]
@@ -33,7 +19,7 @@ const mapStateToProps = (state: AppStateTypes): MapStateToPropsType => {
         dialogs: state.dialogsPage.dialogs
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+const mapDispatchToProps = (): MapDispatchToPropsType => {
     return {}
 }
 

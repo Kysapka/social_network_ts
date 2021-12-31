@@ -1,6 +1,6 @@
 import axios from "axios";
-import {UserType} from "../redux/usersReducer";
-import {ProfilePageTypes} from "../redux/profileReducer";
+import {UserType} from "../redux/UsersReducer";
+import {ProfilePageTypes} from "../redux/ProfileReducer";
 
 const instance = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,

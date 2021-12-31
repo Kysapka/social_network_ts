@@ -1,7 +1,7 @@
 import React from 'react'
 import s from "./Users.module.css";
 import OneUserCard from "./OneUserCard/OneUserCard";
-import {UserType} from "../../../redux/usersReducer";
+import {UserType} from "../../../redux/UsersReducer";
 import PreloaderStar from "../../../icons/Preloaders/PreloaderStar";
 import {ProfilePageType} from "./UsersContainer";
 

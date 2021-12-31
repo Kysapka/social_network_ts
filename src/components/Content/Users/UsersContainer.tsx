@@ -11,7 +11,7 @@ import {
     setUsers,
     toggleIsFetching,
     UserType
-} from "../../../redux/usersReducer";
+} from "../../../redux/UsersReducer";
 import bg1 from "../../../assets/images/users/user-cover1.jpg";
 import bg2 from "../../../assets/images/users/user-cover13.jpg";
 import bg3 from "../../../assets/images/users/user-cover3.jpg";

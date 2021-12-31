@@ -64,7 +64,7 @@ const initialState = {
     ]
 }
 
-function rightSidebar(state: RightSidebarTypes = initialState, action: any): RightSidebarTypes {
+function rightSidebar(state: RightSidebarTypes = initialState): RightSidebarTypes {
     return state
 }
 

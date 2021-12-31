@@ -1,8 +1,8 @@
 import {connect} from "react-redux";
 import {Messages} from "./Messages";
-import {messageTypes} from "../../../../redux/dialogsReducer";
+import {messageTypes} from "../../../../redux/DialogsReducer";
 import {AppStateTypes} from "../../../../redux/store";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 import withAuthRedirect from "../../../../hoc/withAuthRedirect";
 import React from "react";
 
@@ -19,7 +19,7 @@ const mapStateToProps = (state: AppStateTypes): mapStateToPropsType => {
         messages: state.dialogsPage.messages
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+const mapDispatchToProps = (): mapDispatchToPropsType => {
     return {
 
     }

@@ -1,4 +1,4 @@
-import {postTypes} from "../../../../redux/postsReducer";
+import {postTypes} from "../../../../redux/PostsReducer";
 import {AppStateTypes} from "../../../../redux/store";
 import {connect} from "react-redux";
 import {MyPosts} from "./MyPosts";

@@ -3,7 +3,7 @@ import s from './OnlineFriends.module.css'
 import OnlineFriend from "./OnlineFriend/OnlineFriend";
 import {useSelector} from "react-redux";
 import {AppStateTypes} from "../../redux/store";
-import {OnlineFriendTypes} from "../../redux/rightSidebar";
+import {OnlineFriendTypes} from "../../redux/RightSidebar";
 
 export function OnlineFriends() {
 

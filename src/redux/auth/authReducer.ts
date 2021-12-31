@@ -2,7 +2,7 @@ import {authAPI, profileAPI} from "../../apis/api";
 import {RootThunkType} from "../store";
 import {AuthInitialStateTypes, AuthRootActionsType, initialState, SetAuthUserDataType} from "./authTypes";
 import {authActions} from "./authActions";
-import {ProfilePageTypes} from "../profileReducer";
+import {ProfilePageTypes} from "../ProfileReducer";
 
 function authReducer(state: AuthInitialStateTypes = initialState, action: AuthRootActionsType): AuthInitialStateTypes {
     switch (action.type) {

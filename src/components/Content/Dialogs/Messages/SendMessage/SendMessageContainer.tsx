@@ -1,5 +1,4 @@
-import {addMessageAC} from "../../../../../redux/dialogsReducer";
-import {AppStateTypes} from "../../../../../redux/store";
+import {addMessageAC} from "../../../../../redux/DialogsReducer";
 import {SendMessage} from "./SendMessage";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -35,7 +34,7 @@ type MapDispatchToPropsType = {
     onMessageSend: (newMessage: string) => void
 }
 
-const mapStateToProps = (state: AppStateTypes): MapStateToPropsType => {
+const mapStateToProps = (): MapStateToPropsType => {
     return {}
 }
 

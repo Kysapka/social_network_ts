@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './OneUserCard.module.css'
-import {UserType} from "../../../../redux/usersReducer";
+import {UserType} from "../../../../redux/UsersReducer";
 import userIcon from '../../../../assets/images/users/userIcon4.jpg'
 import userIcon2 from '../../../../assets/images/users/userIcon5.jpg'
 import {NavLink} from 'react-router-dom';

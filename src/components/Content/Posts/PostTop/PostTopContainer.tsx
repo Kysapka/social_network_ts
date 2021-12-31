@@ -1,5 +1,4 @@
-import {addPostAC, newPostTextAC} from "../../../../redux/postsReducer";
-import {AppStateTypes} from "../../../../redux/store";
+import {addPostAC, newPostTextAC} from "../../../../redux/PostsReducer";
 import {PostTop} from "./PostTop";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -12,7 +11,7 @@ type MapDispatchToPropsType = {
 }
 export type ProfileTopPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const mapStateToProps = (state: AppStateTypes): MapStateToPropsType => {
+const mapStateToProps = (): MapStateToPropsType => {
     return {}
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {

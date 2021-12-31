@@ -1,12 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import postsReducer from "./postsReducer";
-import dialogsReducer from "./dialogsReducer";
-import rightSidebar from "./rightSidebar";
-import usersReducer, {UsersRootActionsType} from "./usersReducer";
-import profileReducer, {DialogsActionsRootType} from "./profileReducer";
+import postsReducer from "./PostsReducer";
+import dialogsReducer from "./DialogsReducer";
+import rightSidebar from "./RightSidebar";
+import usersReducer, {UsersRootActionsType} from "./UsersReducer";
+import profileReducer, {DialogsActionsRootType} from "./ProfileReducer";
 import authReducer from "./auth/authReducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
-import statusReducer, {StatusRootActionsType} from "./statusReducer";
+import statusReducer, {StatusRootActionsType} from "./StatusReducer";
 import {AuthRootActionsType} from "./auth/authTypes";
 
 export type AppStateTypes = ReturnType<typeof rootReducer>

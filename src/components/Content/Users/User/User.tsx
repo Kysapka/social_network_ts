@@ -3,7 +3,7 @@ import s from './User.module.css'
 import bgImage from '../../../../assets/images/users/user-cover6.jpg'
 import userIconMan from '../../../../assets/images/users/userIcon4.jpg'
 import userIconWoman from '../../../../assets/images/users/userIcon5.jpg'
-import {ProfilePageTypes} from "../../../../redux/profileReducer";
+import {ProfilePageTypes} from "../../../../redux/ProfileReducer";
 import PreloaderStar from "../../../../icons/Preloaders/PreloaderStar";
 import {AddPropsType} from "./UserContainer";
 import ProfileStatus from "./ProfileStatus";

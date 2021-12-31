@@ -1,12 +1,12 @@
 import {AppStateTypes} from "../store";
-import {UserType} from "../usersReducer";
+import {UserType} from "../UsersReducer";
 import {createSelector} from "reselect";
 
 const getUsers = (state: AppStateTypes): UserType[] => {
     return state.usersPage.users
 }
 export const getUsersSelector = createSelector(getUsers, (users) => {
-    return users.filter(u => true)
+    return users.filter(() => true)
 })
 export const getIsFollowFetching = (state: AppStateTypes): number[] => {
     return state.usersPage.isFollowFetching
