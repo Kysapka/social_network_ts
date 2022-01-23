@@ -1,55 +1,55 @@
-import {setFollow, UsersPageTypes} from "../redux/UsersReducer";
-import mock = jest.mock;
-import store from "../redux/store";
+import {follow, setFollow, setUnfollow, toggleFollowIsFetching, unfollow} from "../redux/UsersReducer";
+import {followAPI, ResponseApiType} from '../apis/api';
 
-
-let initialTestThunkState: UsersPageTypes;
-
-const dispatch = mock('dispatch').fn
-const getState = mock('getState').fn
-
-beforeEach(() => {
-    initialTestThunkState = {
-        users: [
-            {
-                id: 1,
-                name: 'Artem',
-                followed: false,
-                photos: {small: '', large: ''},
-                uniqueUrlName: 'uniqueUrlName',
-                status: '0'
-            },
-            {
-                id: 2,
-                name: 'Petya',
-                followed: false,
-                photos: {small: '', large: ''},
-                uniqueUrlName: 'uniqueUrlName',
-                status: '1'
-            },
-            {
-                id: 3,
-                name: 'Ivan',
-                followed: true,
-                photos: {small: '', large: ''},
-                uniqueUrlName: 'uniqueUrlName',
-                status: '2'
-            },
-        ],
-        pagesSize: 12,
-        totalUsersCount: 0,
-        currentPage: 1,
-        isFetching: false,
-        isFollowFetching: []
+const result: ResponseApiType<{}> = {
+    resultCode: 0,
+    messages: ['123'],
+    data: {
+        resultCode: 0
     }
+}
+
+jest.mock('../apis/api')
+const followAPIMock = followAPI as jest.Mocked<typeof followAPI>
+
+const dispatchMock = jest.fn()
+const getStateMock = jest.fn()
+
+
+
+beforeEach(() =>{
+    dispatchMock.mockClear()
+    getStateMock.mockClear()
+    followAPIMock.follow.mockReturnValue(Promise.resolve(result))
+    followAPIMock.unfollow.mockReturnValue(Promise.resolve(result))
 })
 
-test('follow thunk test', () => {
+afterAll(() => {
+    followAPIMock.follow.mockClear()
+    followAPIMock.unfollow.mockClear()
+})
 
-    const followThunk = setFollow(1)
 
-    followThunk(dispatch, getState,{})
+test('follow thunk test',  async() => {
 
-    console.log(followThunk)
+   const followThunk = setFollow(1)
 
+   await followThunk(dispatchMock, getStateMock, {})
+
+   expect(dispatchMock).toBeCalledTimes(3)
+   expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowIsFetching(1, true))
+   expect(dispatchMock).toHaveBeenNthCalledWith(2, follow(1))
+   expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowIsFetching(1, false))
+})
+
+test('unfollow thunk test',  async() => {
+
+    const unfollowThunk = setUnfollow(1)
+
+    await unfollowThunk(dispatchMock, getStateMock, {})
+
+    expect(dispatchMock).toBeCalledTimes(3)
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowIsFetching(1, true))
+    expect(dispatchMock).toHaveBeenNthCalledWith(2, unfollow(1))
+    expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowIsFetching(1, false))
 })

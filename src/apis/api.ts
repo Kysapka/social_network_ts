@@ -10,7 +10,7 @@ const instance = axios.create({
     }
 })
 
-type ResponseApiType<T> = {
+export type ResponseApiType<T> = {
     resultCode: 1 | 0
     messages: string[]
     data: T
@@ -28,7 +28,7 @@ type AuthResponseDataType = {
 type ProfileApiResponseType = ProfilePageTypes
 
 export const followAPI = {
-    follow(userID: number) {
+     follow (userID: number) {
         return instance.post<ResponseApiType<{}>>(`follow/${userID}`, {})
             .then(res => res.data)
     },
