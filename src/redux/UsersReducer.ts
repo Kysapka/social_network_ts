@@ -1,5 +1,6 @@
 import {RootThunkType} from "./store";
 import {followAPI, usersAPI} from "../apis/api";
+import { call, put } from 'redux-saga/effects'
 
 export type UsersPageTypes = {
     users: UserType[]
@@ -98,18 +99,40 @@ export const setCurrentPage = (currentPage: number) => { return {type: 'SET-CURR
 export const setTotalCount = (totalCount: number) => { return {type: 'SET-PAGES-COUNT', totalCount} as const }
 export const toggleIsFetching = (isFetching: boolean) => { return {type: 'TOGGLE-IS-FETCHING', isFetching} as const }
 
-export const setFollow = (userID: number): RootThunkType => async dispatch => {
-    dispatch(toggleFollowIsFetching(userID, true))
-    const followData = await followAPI.follow(userID)
-    if (followData.resultCode === 0)  dispatch(follow(userID))
-    dispatch(toggleFollowIsFetching(userID, false))
+
+export const setFollow = (userID: number) =>  ({type: 'setFollowFromSaga', userID})
+
+export function* setFollowWorkSaga({userID}: any): any {
+    yield put(toggleFollowIsFetching(userID, true))
+    const followData = yield call(followAPI.follow, userID)
+    if (followData.resultCode === 0) yield put(follow(userID))
+    yield put(toggleFollowIsFetching(userID, false))
 }
-export const setUnfollow = (userID: number): RootThunkType => async dispatch => {
-    dispatch(toggleFollowIsFetching(userID, true))
-    const followData = await followAPI.unfollow(userID)
-    if (followData.resultCode === 0)  dispatch(unfollow(userID))
-    dispatch(toggleFollowIsFetching(userID, false))
+
+// export const setFollow = (userID: number): RootThunkType => async dispatch => {
+//     dispatch(toggleFollowIsFetching(userID, true))
+//     const followData = await followAPI.follow(userID)
+//     if (followData.resultCode === 0)  dispatch(follow(userID))
+//     dispatch(toggleFollowIsFetching(userID, false))
+// }
+
+
+export const setUnfollow = (userID: number) => ({type: 'setUnFollowFromSaga', userID})
+
+export function* setUnFollowWorkSaga({userID}: any): any {
+    yield put(toggleFollowIsFetching(userID, true))
+    const followData = yield call(followAPI.unfollow, userID)
+    if (followData.resultCode === 0)  yield put(unfollow(userID))
+    yield put(toggleFollowIsFetching(userID, false))
 }
+
+// export const setUnfollow = (userID: number): RootThunkType => async dispatch => {
+//     dispatch(toggleFollowIsFetching(userID, true))
+//     const followData = await followAPI.unfollow(userID)
+//     if (followData.resultCode === 0)  dispatch(unfollow(userID))
+//     dispatch(toggleFollowIsFetching(userID, false))
+// }
+
 export const getUsers = (currentPage: number, pageSize: number): RootThunkType => async dispatch => {
     const users = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(setUsers(users.items))

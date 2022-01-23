@@ -34,7 +34,7 @@ test('follow thunk test',  async() => {
 
    const followThunk = setFollow(1)
 
-   await followThunk(dispatchMock, getStateMock, {})
+   // await followThunk(dispatchMock, getStateMock, {})
 
    expect(dispatchMock).toBeCalledTimes(3)
    expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowIsFetching(1, true))
@@ -46,7 +46,7 @@ test('unfollow thunk test',  async() => {
 
     const unfollowThunk = setUnfollow(1)
 
-    await unfollowThunk(dispatchMock, getStateMock, {})
+    // await unfollowThunk(dispatchMock, getStateMock, {})
 
     expect(dispatchMock).toBeCalledTimes(3)
     expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowIsFetching(1, true))
