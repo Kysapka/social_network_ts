@@ -112,10 +112,10 @@ export const setUnfollow = (userID: number): RootThunkType => async dispatch => 
 }
 export const getUsers = (currentPage: number, pageSize: number): RootThunkType => async dispatch => {
     const users = await usersAPI.getUsers(currentPage, pageSize)
+    debugger
     dispatch(setUsers(users.items))
     dispatch(toggleIsFetching(false))
     dispatch(setTotalCount(users.totalCount))
-
 }
 
 export default usersReducer

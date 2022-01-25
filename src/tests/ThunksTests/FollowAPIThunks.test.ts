@@ -1,9 +1,9 @@
-import {follow, setFollow, setUnfollow, toggleFollowIsFetching, unfollow} from "../redux/UsersReducer";
-import {followAPI, ResponseApiType} from '../apis/api';
+import {follow, setFollow, setUnfollow, toggleFollowIsFetching, unfollow} from "../../redux/UsersReducer";
+import {followAPI, ResponseApiType} from '../../apis/api';
 
 const result: ResponseApiType<{}> = {
     resultCode: 0,
-    messages: ['123'],
+    messages: [],
     data: {
         resultCode: 0
     }

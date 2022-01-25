@@ -15,7 +15,7 @@ export type ResponseApiType<T> = {
     messages: string[]
     data: T
 }
-type UserApiResponseType = {
+export type UserApiResponseType = {
     error: null | string
     items: UserType[]
     totalCount: number
