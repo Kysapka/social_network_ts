@@ -2,7 +2,12 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import postsReducer from "./PostsReducer";
 import dialogsReducer from "./DialogsReducer";
 import rightSidebar from "./RightSidebar";
-import usersReducer, {setFollowWorkSaga, setUnFollowWorkSaga, UsersRootActionsType} from "./UsersReducer";
+import usersReducer, {
+    getUsersWorkSaga,
+    setFollowWorkSaga,
+    setUnFollowWorkSaga,
+    UsersRootActionsType
+} from "./UsersReducer";
 import profileReducer, {DialogsActionsRootType} from "./ProfileReducer";
 import authReducer from "./auth/authReducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
@@ -31,9 +36,14 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMidd
 
 sagaMiddleware.run(rootSagaWatcher)
 
-function* rootSagaWatcher() {
+function* FollowAPIWorkSagas() {
     yield takeEvery('setFollowFromSaga', setFollowWorkSaga)
     yield takeEvery('setUnFollowFromSaga', setUnFollowWorkSaga)
+}
+
+function* rootSagaWatcher() {
+    FollowAPIWorkSagas()
+    yield takeEvery('getUsersFromSaga', getUsersWorkSaga)
 }
 
 

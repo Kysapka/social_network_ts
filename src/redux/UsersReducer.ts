@@ -133,12 +133,20 @@ export function* setUnFollowWorkSaga({userID}: any): any {
 //     dispatch(toggleFollowIsFetching(userID, false))
 // }
 
-export const getUsers = (currentPage: number, pageSize: number): RootThunkType => async dispatch => {
-    const users = await usersAPI.getUsers(currentPage, pageSize)
-    dispatch(setUsers(users.items))
-    dispatch(toggleIsFetching(false))
-    dispatch(setTotalCount(users.totalCount))
+export const getUsers = (currentPage: number, pageSize: number) => ({type: 'getUsersFromSaga', currentPage, pageSize})
 
+export function* getUsersWorkSaga({currentPage, pageSize}: any): any {
+    const users = yield call(usersAPI.getUsers, currentPage, pageSize)
+    yield put(setUsers(users.items))
+    yield put(toggleIsFetching(false))
+    yield put(setTotalCount(users.totalCount))
 }
+
+// export const getUsers = (currentPage: number, pageSize: number): RootThunkType => async dispatch => {
+//     const users = await usersAPI.getUsers(currentPage, pageSize)
+//     dispatch(setUsers(users.items))
+//     dispatch(toggleIsFetching(false))
+//     dispatch(setTotalCount(users.totalCount))
+// }
 
 export default usersReducer
